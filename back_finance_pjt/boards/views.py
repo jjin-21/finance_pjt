@@ -12,7 +12,7 @@ def board_list(request):
     if request.method == 'GET':
         boards = Board.objects.all()
         serializer = BoardSerializer(boards, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
     elif request.method == 'POST':
         serializer = BoardSerializer(data=request.data)
         if serializer.is_valid():
@@ -23,16 +23,17 @@ def board_list(request):
         serializer = BoardSerializer(boards, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data)
+            return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+
+
 @api_view(['GET', 'DELETE', 'PUT'])
 def board_detail(request, board_pk):
     board = Board.objects.get(pk=board_pk)
 
     if request.method == 'GET':
         serializer = BoardSerializer(board)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     elif request.method == 'DELETE':
         board.delete()
@@ -42,5 +43,5 @@ def board_detail(request, board_pk):
         serializer = BoardSerializer(board, data=request.data, partial=True)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
-            return Response(serializer.data)
+            return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
         # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

@@ -5,14 +5,15 @@ class CommentSerializer(serializers.ModelSerializer):
     class BoardTitleSerializer(serializers.ModelSerializer):
         class Meta():
             model = Board
-            fields = ('title',)
+            fields = ('id', 'title',)
+            read_only_fields=('user',)
             
     board = BoardTitleSerializer(read_only=True)
     
     class Meta():
         model = Comment
         fields = '__all__'
-        # read_only_fields = ('board',)
+        read_only_fields = ('user',)
 
 
 class BoardSerializer(serializers.ModelSerializer):

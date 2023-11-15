@@ -56,10 +56,12 @@ def comment_list(request):
 
 @api_view(['POST'])
 def comment_create(request, board_pk):
+    print('@@@',request.data)
     board = Board.objects.get(pk=board_pk)
     serializer = CommentSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
-        serializer.save(board=board)
+        print('Hello')
+        serializer.save(board=board, user=request.user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 

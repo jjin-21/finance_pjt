@@ -5,6 +5,9 @@ app_name = 'boards'
 urlpatterns = [
     path('',views.board_list),
     path('<int:board_pk>/',views.board_detail),
+    path('comments/',views.comment_list),
+    path('comment/<int:comment_pk>/', views.comment_detail),
+    path('<int:board_pk>/comments/', views.comment_create),
     # path('', views.index, name='index'),
     # path('create/', views.create, name='create'),
     # path('<int:pk>/detail/', views.detail, name='detail'),

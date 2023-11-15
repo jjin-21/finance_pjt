@@ -38,24 +38,24 @@
       </v-container>
     </v-app-bar>
 
-    <v-main class="bg-grey-lighten-3" p-0>
-      <v-container fluid>
+    <v-main class="bg-grey-lighten-3" >
+      <v-container fluid class="pa-0">
         <v-row no-gutters>
           <v-col cols="2">
-            <v-sheet min-height="150vh" rounded="sm">
+            <v-sheet min-height="150vh" rounded="0">
               <!-- ... (좌측 컬럼 내용) ... -->
               
             </v-sheet>
           </v-col>
 
           <v-col cols="8">
-            <v-sheet min-height="150vh" rounded="sm">
+            <v-sheet min-height="150vh" rounded="0">
               <router-view />
             </v-sheet>
           </v-col>
 
           <v-col cols="2">
-            <v-sheet min-height="150vh" rounded="sm">
+            <v-sheet min-height="150vh" rounded="0">
               <!-- ... (우측 컬럼 내용) ... -->
             </v-sheet>
           </v-col>

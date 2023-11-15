@@ -2,6 +2,7 @@ from django.shortcuts import render
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from django.conf import settings
 
 from .models import Board, Comment
 from .serializers import BoardSerializer, CommentSerializer
@@ -33,6 +34,9 @@ def board_detail(request, board_pk):
 
     if request.method == 'GET':
         serializer = BoardSerializer(board)
+        for comment_data in serializer.data['comment_set']:
+            comment_data['user']='종걸'
+            # settings.AUTH_USER_MODEL
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     elif request.method == 'DELETE':
@@ -56,11 +60,9 @@ def comment_list(request):
 
 @api_view(['POST'])
 def comment_create(request, board_pk):
-    print('@@@',request.data)
     board = Board.objects.get(pk=board_pk)
     serializer = CommentSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
-        print('Hello')
         serializer.save(board=board, user=request.user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 

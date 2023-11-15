@@ -18,7 +18,7 @@ export const useCounterStore = defineStore('counter', () => {
   const getArticles = function () {
     axios({
       method: 'get',
-      url: `${API_URL}/api/v1/articles/`,
+      url: `${API_URL}/boards/`,
       headers: {
         Authorization: `Token ${token.value}`
       }

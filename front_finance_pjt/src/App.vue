@@ -38,21 +38,25 @@
       </v-container>
     </v-app-bar>
 
-    <v-main class="bg-grey-lighten-3">
-      <v-container>
-        <v-row>
+    <v-main class="bg-grey-lighten-3" p-0>
+      <v-container fluid>
+        <v-row no-gutters>
           <v-col cols="2">
-            <v-sheet rounded="lg">
-             
+            <v-sheet min-height="150vh" rounded="sm">
+              <!-- ... (좌측 컬럼 내용) ... -->
+              
             </v-sheet>
           </v-col>
 
-          <v-col>
-            <v-sheet
-              min-height="80vh"
-              rounded="lg"
-            >
+          <v-col cols="8">
+            <v-sheet min-height="150vh" rounded="sm">
               <router-view />
+            </v-sheet>
+          </v-col>
+
+          <v-col cols="2">
+            <v-sheet min-height="150vh" rounded="sm">
+              <!-- ... (우측 컬럼 내용) ... -->
             </v-sheet>
           </v-col>
         </v-row>
@@ -62,13 +66,6 @@
 </template>
 
 <script setup>
-  const links = [
-    'Dashboard',
-    'Messages',
-    'Profile',
-    'Updates',
-  ]
-
   import { useTheme } from 'vuetify'
 
   const theme = useTheme()
@@ -78,15 +75,3 @@
   }
 </script>
 
-<script>
-  export default {
-    data: () => ({
-      links: [
-        'HomeView',
-        'Messages',
-        'Profile',
-        'Updates',
-      ],
-    }),
-  }
-</script>

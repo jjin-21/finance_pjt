@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from django.conf import settings
+from accounts.models import User
 
 from .models import Board, Comment
 from .serializers import BoardSerializer, CommentSerializer
@@ -34,9 +34,6 @@ def board_detail(request, board_pk):
 
     if request.method == 'GET':
         serializer = BoardSerializer(board)
-        for comment_data in serializer.data['comment_set']:
-            comment_data['user']='종걸'
-            # settings.AUTH_USER_MODEL
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     elif request.method == 'DELETE':

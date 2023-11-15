@@ -1,21 +1,23 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import ArticleView from '@/views/ArticleView.vue'
+import BoardView from '@/views/BoardView.vue'
 import DetailView from '@/views/DetailView.vue'
 import CreateView from '@/views/CreateView.vue'
 import SignUpView from '@/views/SignUpView.vue'
 import LogInView from '@/views/LogInView.vue'
+import LogOutView from '@/views/LogOutView.vue'
 import HomeView from '@/views/Home.vue'
+import KaKaoMapView from '@/views/KaKaoMapView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/articles',
-      name: 'ArticleView',
-      component: ArticleView
+      path: '/boards/',
+      name: 'BoardView',
+      component: BoardView
     },
     {
-      path: '/articles/:id',
+      path: '/boards/:id',
       name: 'DetailView',
       component: DetailView
     },
@@ -35,9 +37,19 @@ const router = createRouter({
       component: LogInView
     },
     {
+      path: '/logout',
+      name: 'LogOutView',
+      component: LogOutView
+    },
+    {
       path: '/Home',
       name: 'HomeView',
       component: HomeView
+    },
+    {
+      path: '/Map',
+      name: 'KaKaoMapView',
+      component: KaKaoMapView
     }
   ]
 })
@@ -46,13 +58,13 @@ import { useCounterStore } from '../stores/counter'
 
 router.beforeEach((to, from) => {
   const store = useCounterStore()
-  if(to.name === 'ArticleView' && !store.isLogin ) {
+  if(to.name === 'BoardView' && !store.isLogin ) {
     window.alert('로그인이 필요합니다.')
     return { name: 'LogInView' }
   }
   if((to.name === 'SignUpView' || to.name === 'LogInView') && (store.isLogin)) {
     window.alert('이미 로그인 했습니다')
-    return { name: 'ArticleView'}
+    return { name: 'BoardView'}
   }
 })
 

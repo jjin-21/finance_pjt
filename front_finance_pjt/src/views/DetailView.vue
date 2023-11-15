@@ -1,11 +1,11 @@
 <template>
   <div>
     <h1>Detail</h1>
-    <div v-if="article">
-      <p>제목 : {{ article.title }}</p>
-      <p>내용 : {{ article.content }}</p>
-      <p>작성일 : {{ article.created_at }}</p>
-      <p>수정일 : {{ article.updated_at }}</p>
+    <div v-if="board">
+      <p>제목 : {{ board.title }}</p>
+      <p>내용 : {{ board.content }}</p>
+      <p>작성일 : {{ board.created_at }}</p>
+      <p>수정일 : {{ board.updated_at }}</p>
       <hr>
       <form @submit.prevent="createComment">
         <input type="text" v-model="comment">
@@ -13,7 +13,9 @@
       </form>
       <hr>
       <div v-for="comment in commentLst">
-        <p>{{ comment.content }}</p>
+        <span>{{ comment.username }}</span>
+        <span> - </span>
+        <span>{{ comment.content }}</span>
       </div>
     </div>
   </div>
@@ -27,7 +29,7 @@ import { useRoute } from 'vue-router'
 
 const store = useCounterStore()
 const route = useRoute()
-const article = ref(null)
+const board = ref(null)
 const comment = ref(null)
 const commentLst = ref([])
 
@@ -38,7 +40,7 @@ onMounted(() => {
   })
     .then((res) => {
       console.log(res.data)
-      article.value = res.data
+      board.value = res.data
       commentLst.value = res.data.comment_set
     })
     .catch((err) => {

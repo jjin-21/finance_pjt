@@ -1,11 +1,16 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
+import { useRouter } from 'vue-router'
 import axios from 'axios'
 
+
 export const useCounterStore = defineStore('counter', () => {
-  const articles = ref([])
+  const boards = ref([])
   const API_URL = 'http://127.0.0.1:8000'
   const token = ref(null)
+  const router = useRouter()
+  const user_name = ref(null)
+
   const isLogin = computed(() => {
     if (token.value === null) {
       return false
@@ -14,8 +19,8 @@ export const useCounterStore = defineStore('counter', () => {
     }
   })
 
-  // DRF에 article 조회 요청을 보내는 action
-  const getArticles = function () {
+  // DRF에 board 조회 요청을 보내는 action
+  const getBoards = function () {
     axios({
       method: 'get',
       url: `${API_URL}/boards/`,
@@ -24,8 +29,8 @@ export const useCounterStore = defineStore('counter', () => {
       }
     })
       .then((res) =>{
-        // console.log(res)
-        articles.value = res.data
+        console.log(res)
+        boards.value = res.data
       })
       .catch((err) => {
         console.log(err)
@@ -61,14 +66,39 @@ export const useCounterStore = defineStore('counter', () => {
       }
     })
       .then((res) => {
-        console.log(res.data)
+        // console.log(res)
+        // console.log(res.data)
         token.value = res.data.key
+        console.log(username)
+        user_name.value = username
+        router.push({ name : 'HomeView'})
       })
       .catch((err) => {
         console.log(err)
       })
   }
 
+  const logOut = function () {
+    axios({
+      method: 'post',
+      url: `${API_URL}/accounts/logout/`,
+      // headers: {
+      //   Authorization: `Token ${token.value}`
+      // }
+    })
+      .then((res) => {
+        token.value = null
+        user_name.value = null
+        window.alert('로그아웃이 완료 되었습니다.')
+        console.log(res)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    
+  }
 
-  return { articles, API_URL, getArticles, signUp, logIn, token, isLogin }
+
+
+  return { boards, API_URL, getBoards, signUp, logIn, token, isLogin, user_name, logOut}
 }, { persist: true })

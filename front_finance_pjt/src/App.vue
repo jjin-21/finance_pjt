@@ -13,18 +13,40 @@
         >Home</v-btn>
 
         <v-btn
-         :to="{name : 'ArticleView'}"
-        >Article</v-btn>
+         :to="{name : 'BoardView'}"
+        >Board</v-btn>
 
         <v-btn
-         :to="{name : 'SignUpView'}"
-        >SignUp</v-btn>
+          :to="{name: 'KaKaoMapView'}"
+        >Map</v-btn>
+
+        
 
         <v-spacer></v-spacer>
 
         <v-btn @click="toggleTheme">toggle theme</v-btn>
 
-        <v-responsive max-width="160">
+        <v-btn
+          v-show="store.isLogin"
+          v-text="store.user_name"
+        ></v-btn>
+
+        <v-btn
+          v-show="store.isLogin"
+          :to="{name: 'LogOutView'}"
+        >LogOut</v-btn>
+
+        <v-btn
+          v-show="!store.isLogin"
+         :to="{name : 'LogInView'}"
+        >LogIn</v-btn>
+
+        <v-btn
+          v-show="!store.isLogin"
+         :to="{name : 'SignUpView'}"
+        >SignUp</v-btn>
+
+        <!-- <v-responsive max-width="160">
           <v-text-field
             density="compact"
             flat
@@ -34,7 +56,7 @@
             single-line
             variant="solo-filled"
           ></v-text-field>
-        </v-responsive>
+        </v-responsive> -->
       </v-container>
     </v-app-bar>
 
@@ -67,8 +89,10 @@
 
 <script setup>
   import { useTheme } from 'vuetify'
+  import { useCounterStore } from './stores/counter';
 
   const theme = useTheme()
+  const store = useCounterStore()
 
   function toggleTheme () {
     theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark'

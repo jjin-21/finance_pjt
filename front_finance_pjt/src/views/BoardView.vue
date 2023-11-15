@@ -1,10 +1,10 @@
 <template>
   <div>
-    <h1>Article Page</h1>
+    <h1>Board Page</h1>
     <RouterLink :to="{ name: 'CreateView' }">
       [CREATE]
     </RouterLink>
-    <ArticleList />
+    <BoardList />
   </div>
 </template>
 
@@ -12,12 +12,12 @@
 import { onMounted } from 'vue'
 import { useCounterStore } from '@/stores/counter'
 import { RouterLink } from 'vue-router'
-import ArticleList from '@/components/ArticleList.vue'
+import BoardList from '@/components/BoardList.vue'
 
 const store = useCounterStore()
 
 onMounted(() => {
-  store.getArticles()
+  store.getBoards()
 })
 
 </script>

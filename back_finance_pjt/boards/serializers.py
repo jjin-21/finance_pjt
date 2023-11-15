@@ -3,10 +3,12 @@ from .models import Board, Comment
 
 
 class CommentSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(source='user.username', read_only=True)
     class BoardTitleSerializer(serializers.ModelSerializer):
+        username = serializers.CharField(source='user.username', read_only=True)
         class Meta():
             model = Board
-            fields = ('id', 'title',)
+            fields = ('id', 'title', 'username')
             read_only_fields=('user',)
             
     board = BoardTitleSerializer(read_only=True)
@@ -18,10 +20,11 @@ class CommentSerializer(serializers.ModelSerializer):
 
 
 class BoardSerializer(serializers.ModelSerializer):
+
     comment_set = CommentSerializer(many=True, read_only=True)
-    
+    username = serializers.CharField(source='user.username', read_only=True)
     class Meta():
         model = Board
         fields = '__all__'
-        read_only_fields = ('user',)
+        read_only_fields = ('user', 'user_name',)
 

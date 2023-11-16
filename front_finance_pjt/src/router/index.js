@@ -8,6 +8,8 @@ import LogOutView from '@/views/LogOutView.vue'
 import HomeView from '@/views/Home.vue'
 import KaKaoMapView from '@/views/KaKaoMapView.vue'
 import ExChangeView from '@/views/ExChangeView.vue'
+import ProductView from '@/views/ProductView.vue'
+import UpdateView from '@/views/UpdateView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -56,6 +58,16 @@ const router = createRouter({
       path: '/exchange',
       name: 'ExChangeView',
       component: ExChangeView
+    },
+    {
+      path: '/product',
+      name: 'ProductView',
+      component: ProductView
+    },
+    {
+      path: '/boards/:id/update/',
+      name: 'UpdateView',
+      component: UpdateView
     }
   ]
 })

@@ -23,7 +23,10 @@
         <v-btn
           :to="{name: 'ExChangeView'}"
         >ExChange</v-btn>
-
+        
+        <v-btn
+          :to="{name: 'ProductView'}"
+        >Product</v-btn>
         
 
         <v-spacer></v-spacer>

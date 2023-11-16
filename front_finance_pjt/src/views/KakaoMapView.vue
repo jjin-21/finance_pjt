@@ -15,11 +15,11 @@
                 <option disabled value="">은행 선택</option>
                 <option v-for="bank in banks" :value="bank">{{ bank }}</option>
             </select>
-            <input type="submit">
+            <input type="submit" value="검색하기">
         </form>
         </div>
         <div class="map_wrap">
-            <div id="map" ref="map" style="width:100%;height:1000px;position:relative;overflow:hidden;"></div>
+            <div id="map" ref="map" style="width:100%;height:800px;position:relative;overflow:hidden;"></div>
         
             <div id="menu_wrap" class="bg_white">
                 <div class="option">
@@ -374,7 +374,7 @@
   #placesList .item .marker_15 {background-position: 0 -654px;}
   #pagination {
     margin: 10px auto;
-    text-align: right;
+    text-align: center;
   }
   
   #pagination a {

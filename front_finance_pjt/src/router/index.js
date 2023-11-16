@@ -7,6 +7,7 @@ import LogInView from '@/views/LogInView.vue'
 import LogOutView from '@/views/LogOutView.vue'
 import HomeView from '@/views/Home.vue'
 import KaKaoMapView from '@/views/KaKaoMapView.vue'
+import ExChangeView from '@/views/ExChangeView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -42,14 +43,19 @@ const router = createRouter({
       component: LogOutView
     },
     {
-      path: '/Home',
+      path: '/home',
       name: 'HomeView',
       component: HomeView
     },
     {
-      path: '/Map',
+      path: '/map',
       name: 'KaKaoMapView',
       component: KaKaoMapView
+    },
+    {
+      path: '/exchange',
+      name: 'ExChangeView',
+      component: ExChangeView
     }
   ]
 })

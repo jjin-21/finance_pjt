@@ -20,6 +20,10 @@
           :to="{name: 'KaKaoMapView'}"
         >Map</v-btn>
 
+        <v-btn
+          :to="{name: 'ExChangeView'}"
+        >ExChange</v-btn>
+
         
 
         <v-spacer></v-spacer>

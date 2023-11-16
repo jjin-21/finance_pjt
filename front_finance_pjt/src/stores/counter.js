@@ -6,6 +6,7 @@ import axios from 'axios'
 
 export const useCounterStore = defineStore('counter', () => {
   const boards = ref([])
+  const exchanges = ref([])
   const API_URL = 'http://127.0.0.1:8000'
   const token = ref(null)
   const router = useRouter()
@@ -31,6 +32,34 @@ export const useCounterStore = defineStore('counter', () => {
       .then((res) =>{
         console.log(res)
         boards.value = res.data
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+  // 환율 정보를 백엔드 db에 저장하도록 하는 함수
+  const updateExChange = function () {
+    axios({
+      url: `${API_URL}/exchange-rates/save/`
+    })
+      .then((res) => {
+        console.log(res)
+        router.push({name: 'ExChangeView'})
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
+  // 환율 정보를 db로 부터불러오는 action
+  const getExChange = function () {
+    axios({
+      method: 'get',
+      url: `${API_URL}/exchange-rates/calculator/`
+    })
+      .then((res) => {
+        console.log(res)
+        exchanges.value = res.data
       })
       .catch((err) => {
         console.log(err)
@@ -100,5 +129,5 @@ export const useCounterStore = defineStore('counter', () => {
 
 
 
-  return { boards, API_URL, getBoards, signUp, logIn, token, isLogin, user_name, logOut}
+  return { boards, exchanges, API_URL, getBoards, signUp, logIn, getExChange, token, isLogin, user_name, logOut, updateExChange}
 }, { persist: true })

@@ -17,7 +17,7 @@ def board_list(request):
     elif request.method == 'POST':
         serializer = BoardSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save(user=request.user)
+            board = serializer.save(user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     # elif request.method == 'PUT':
@@ -46,6 +46,17 @@ def board_detail(request, board_pk):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
         # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+def board_likes(request, board_pk):
+    board = Board.objects.get(pk=board_pk)
+    if request.user in board.like_users.all():
+        board.like_users.remove(request.user)
+    else:
+        board.like_users.add(request.user)
+    serializer = BoardSerializer(board)
+    return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 @api_view(['GET'])

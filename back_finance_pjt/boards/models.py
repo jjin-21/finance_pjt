@@ -5,6 +5,8 @@ from django.conf import settings
 # Create your models here.
 class Board(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    like_users = models.ManyToManyField(
+				settings.AUTH_USER_MODEL, related_name='like_boards')
     title = models.CharField(max_length=100)
     content = models.TextField()
     image = models.ImageField(blank=True)

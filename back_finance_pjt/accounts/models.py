@@ -5,10 +5,10 @@ from finances.models import DepositProducts, SavingProducts
 
 # Create your models here.
 class User(AbstractUser):
-    username = models.CharField(max_length=30, unique=True)
-    email = models.EmailField(max_length=50, unique=True)
-    nickname = models.CharField(max_length=20, unique=True)
+    # username = models.CharField(max_length=30, unique=True)
+    # email = models.EmailField(max_length=50, unique=True)
     # phone_num = PhoneNumberField(unique=True)
+    nickname = models.CharField(max_length=20)
     age = models.IntegerField(default=20)
     gender = models.IntegerField(default=1)
     asset = models.IntegerField(blank=True, null=True)

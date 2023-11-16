@@ -29,7 +29,6 @@ const signUp = function () {
   }
   
   store.signUp(payload)
-
 }
 
 

@@ -76,7 +76,8 @@ def comment_create(request, board_pk):
 
 
 @api_view(['GET', 'DELETE', 'PUT'])
-def comment_detail(request, board_pk, comment_pk):
+# comment_detail 인자 board_pk 뻈음
+def comment_detail(request, comment_pk):
     comment = Comment.objects.get(pk=comment_pk)
     if request.method == 'GET':
         serializer = CommentSerializer(comment)
@@ -84,7 +85,7 @@ def comment_detail(request, board_pk, comment_pk):
     
     elif request.method == 'DELETE':
         comment.delete()
-        return Response(serializer.data, status=status.HTTP_204_NO_CONTENT)
+        return Response(status=status.HTTP_204_NO_CONTENT)
         
     elif request.method == 'PUT':
         serializer = CommentSerializer(comment, data=request.data)

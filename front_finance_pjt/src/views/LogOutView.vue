@@ -15,7 +15,8 @@ const store = useCounterStore()
 
 onMounted(() => {
   store.logOut()
-  router.push({name : 'HomeView'})
+  window.history.back();
+  
 })
 
 

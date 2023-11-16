@@ -22,13 +22,19 @@ def save(request):
             # 'searchdate': formatted_date,
             'data': 'AP01'
         }
+	
+        # ExchangeRate.objects.all().delete()
+
         response = requests.get(URL, params=params).json()
         for info in response:
-            serializer = ExchangeRateSerializer(data=info)
-            if serializer.is_valid():
-                serializer.save()
+            rate_data_deal_bas_r = ExchangeRate.objects.filter(deal_bas_r = info["deal_bas_r"])
+            if info["deal_bas_r"] != rate_data_deal_bas_r:
+                rate_data_deal_bas_r.delete()
+                serializer = ExchangeRateSerializer(data=info)
+                if serializer.is_valid():
+                    serializer.save()
         return Response({'message': "Good!"}, status=status.HTTP_201_CREATED)
-        
+
 
 # 환율 조회
 @api_view(['GET'])

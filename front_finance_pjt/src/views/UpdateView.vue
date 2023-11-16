@@ -50,7 +50,8 @@ const updateBoard = function () {
   })
     .then((res) => {
       console.log(res)
-      router.push({ name: 'BoardView' })
+      router.push({name: 'DetailView', params: {id: route.params.id}})
+      
     })
     .catch((err) => {
       console.log(err)

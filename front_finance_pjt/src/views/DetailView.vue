@@ -8,12 +8,24 @@
       <p>수정일 : {{ board.updated_at }}</p>
       <hr>
       <p>
-      <span @click.prevent="updateBoard" style="cursor: pointer">
-        [수정]
-      </span>
-      <span @click.prevent="deleteBoard" style="cursor: pointer">
-        [삭제]
-      </span>
+        <span>
+          좋아요 수 : {{ board.like_users.length }}
+        </span>
+        <span>
+          | |
+        </span>
+        <span>
+          <button @click.prevent="likeBoard">좋아요</button>
+        </span>
+      </p>
+      <hr>
+      <p>
+        <span @click.prevent="updateBoard" style="cursor: pointer">
+          [수정]
+        </span>
+        <span @click.prevent="deleteBoard" style="cursor: pointer">
+          [삭제]
+        </span>
       </p>
       <hr>
       <CommentList 
@@ -38,6 +50,8 @@ const board = ref(null)
 const comment = ref(null)
 const commentLst = ref([])
 
+console.log(route.params.id)
+
 onMounted(() => {
   axios({
     method: 'get',
@@ -51,6 +65,8 @@ onMounted(() => {
     .catch((err) => {
       console.log(err)
     })
+
+  
 
 })
 
@@ -77,6 +93,24 @@ const deleteBoard = function () {
     })
     .catch((err) => {
       console.log(err)
+    })
+}
+
+const likeBoard = function () {
+  axios({
+    method: 'post',
+    url: `${store.API_URL}/boards/${Number(route.params.id)}/likes/`,
+    headers: {
+      Authorization: `Token ${store.token}`
+    }
+  })
+    .then((res) => {
+      console.log(res)
+      router.go(0)
+    })
+    .catch((err) => {
+      console.log(err)
+      
     })
 }
 

@@ -78,6 +78,8 @@ export const useCounterStore = defineStore('counter', () => {
     })
       .then((res) => {
         console.log(res)
+        window.alert('회원 가입이 완료 되었습니다')
+        router.push({name: 'LogInView'})
       })
       .catch((err) => {
         console.log(err)
@@ -108,24 +110,30 @@ export const useCounterStore = defineStore('counter', () => {
   }
 
   const logOut = function () {
-    axios({
-      method: 'post',
-      url: `${API_URL}/accounts/logout/`,
-      // headers: {
-      //   Authorization: `Token ${token.value}`
-      // }
-    })
-      .then((res) => {
-        token.value = null
-        user_name.value = null
-        window.alert('로그아웃이 완료 되었습니다.')
-        console.log(res)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-    
-  }
+    const userConfirmed = window.confirm('로그아웃하시겠습니까?');
+
+    if (userConfirmed) {
+        axios({
+            method: 'post',
+            url: `${API_URL}/accounts/logout/`,
+            // headers: {
+            //   Authorization: `Token ${token.value}`
+            // }
+        })
+            .then((res) => {
+                token.value = null;
+                user_name.value = null;
+                window.alert('로그아웃이 완료 되었습니다.');
+                console.log(res);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    } else {
+        // 사용자가 "아니오"를 선택한 경우 또는 창을 닫은 경우
+        // 추가적인 처리가 필요한 경우 여기에 코드를 추가
+    }
+};
 
 
 

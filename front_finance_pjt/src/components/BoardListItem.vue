@@ -2,12 +2,11 @@
   <div>
     <h5>{{ board.id }}</h5>
     <p>글쓴이 : {{ board.username }}</p>
-    <p>제목 : {{ board.title }}</p>
+    <RouterLink :to="{ name: 'DetailView', params: { id: board.id }}">
+      <p>제목 : {{ board.title }} [{{ board.comment_set.length }}]</p>
+    </RouterLink>
     <p>내용 : {{ board.content }}</p>
     
-    <RouterLink :to="{ name: 'DetailView', params: { id: board.id }}">
-      [상세보기]
-    </RouterLink>
     <hr>
   </div>
 </template>

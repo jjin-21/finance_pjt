@@ -22,14 +22,14 @@ def save(request):
             # 'searchdate': formatted_date,
             'data': 'AP01'
         }
-	
-        # ExchangeRate.objects.all().delete()
 
         response = requests.get(URL, params=params).json()
+        # ExchangeRate.objects.all().delete()
         for info in response:
-            rate_data_deal_bas_r = ExchangeRate.objects.filter(deal_bas_r = info["deal_bas_r"])
-            if info["deal_bas_r"] != rate_data_deal_bas_r:
-                rate_data_deal_bas_r.delete()
+            rate_data = ExchangeRate.objects.filter(cur_unit = info["cur_unit"])
+            print(rate_data[0])
+            if info["deal_bas_r"] != rate_data[0].deal_bas_r:
+                rate_data.delete()
                 if "," in info["deal_bas_r"]:
                     info["deal_bas_r"] = info["deal_bas_r"].replace(",","")
                     info["tts"] = info["tts"].replace(",","")

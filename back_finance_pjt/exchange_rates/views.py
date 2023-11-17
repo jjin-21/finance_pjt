@@ -30,6 +30,10 @@ def save(request):
             rate_data_deal_bas_r = ExchangeRate.objects.filter(deal_bas_r = info["deal_bas_r"])
             if info["deal_bas_r"] != rate_data_deal_bas_r:
                 rate_data_deal_bas_r.delete()
+                if "," in info["deal_bas_r"]:
+                    info["deal_bas_r"] = info["deal_bas_r"].replace(",","")
+                    info["tts"] = info["tts"].replace(",","")
+                    info["ttb"] = info["ttb"].replace(",","")
                 serializer = ExchangeRateSerializer(data=info)
                 if serializer.is_valid():
                     serializer.save()

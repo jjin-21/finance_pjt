@@ -36,3 +36,20 @@ class CustomRegisterSerializer(RegisterSerializer):
         adapter.save_user(request, user, self)
         self.custom_signup(request, user)
         return user
+    
+    
+class UserSerializer(serializers.ModelSerializer):
+    class Meta():
+        model = User
+        # fields = '__all__'
+        exclude = ('password',
+                    'last_login',
+                    'is_superuser',
+                    'first_name',
+                    'last_name',
+                    'is_staff',
+                    'is_active',
+                    'date_joined',
+                    'groups',
+                    'user_permissions'
+                    )

@@ -31,6 +31,14 @@
       ></v-text-field>
 
       <v-text-field
+        v-model="email"
+        color="primary"
+        label="Email"
+        placeholder="Enter your email"
+        variant="underlined"
+      ></v-text-field>
+        
+      <v-text-field
         v-model="nickname"
         color="primary"
         label="Nickname"
@@ -73,13 +81,6 @@
       type="number"
       ></v-text-field>
       
-      <v-text-field
-        v-model="email"
-        color="primary"
-        label="Email (Optional)"
-        placeholder="Enter your email"
-        variant="underlined"
-      ></v-text-field>
      
     </v-container>
 

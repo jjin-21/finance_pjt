@@ -1,15 +1,15 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import BoardView from '@/views/BoardView.vue'
-import DetailView from '@/views/DetailView.vue'
-import CreateView from '@/views/CreateView.vue'
-import SignUpView from '@/views/SignUpView.vue'
-import LogInView from '@/views/LogInView.vue'
-import LogOutView from '@/views/LogOutView.vue'
+import DetailView from '@/views/BoardDetailView.vue'
+import CreateView from '@/views/BoardCreateView.vue'
+import SignUpView from '@/views/UserSignUpView.vue'
+import LogInView from '@/views/UserLogInView.vue'
+import LogOutView from '@/views/UserLogOutView.vue'
 import HomeView from '@/views/Home.vue'
 import KaKaoMapView from '@/views/KaKaoMapView.vue'
 import ExChangeView from '@/views/ExChangeView.vue'
 import ProductView from '@/views/ProductView.vue'
-import UpdateView from '@/views/UpdateView.vue'
+import UpdateView from '@/views/BoardUpdateView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

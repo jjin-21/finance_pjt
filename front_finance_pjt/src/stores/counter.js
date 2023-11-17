@@ -11,6 +11,7 @@ export const useCounterStore = defineStore('counter', () => {
   const token = ref(null)
   const router = useRouter()
   const user_name = ref(null)
+  const themeColor = ref('light')
 
   const isLogin = computed(() => {
     if (token.value === null) {
@@ -104,7 +105,7 @@ export const useCounterStore = defineStore('counter', () => {
     })
       .then((res) => {
         // console.log(res)
-        // console.log(res.data)
+        console.log(res.data)
         token.value = res.data.key
         console.log(username)
         user_name.value = username
@@ -143,5 +144,5 @@ export const useCounterStore = defineStore('counter', () => {
 
 
 
-  return { boards, exchanges, API_URL, getBoards, signUp, logIn, getExChange, token, isLogin, user_name, logOut, updateExChange}
+  return { boards, themeColor, exchanges, API_URL, getBoards, signUp, logIn, getExChange, token, isLogin, user_name, logOut, updateExChange}
 }, { persist: true })

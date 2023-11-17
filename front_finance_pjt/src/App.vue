@@ -36,6 +36,7 @@
         <v-btn
           v-show="store.isLogin"
           v-text="store.user_name"
+          
         ></v-btn>
 
         <v-btn
@@ -97,12 +98,21 @@
 <script setup>
   import { useTheme } from 'vuetify'
   import { useCounterStore } from './stores/counter';
+  import { onMounted } from 'vue';
+
+
+  // 다크모드 라이트모드 고정부분
+  onMounted(() => {
+    theme.global.name.value = store.themeColor
+  })
 
   const theme = useTheme()
   const store = useCounterStore()
 
   function toggleTheme () {
-    theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark'
+    store.themeColor = theme.global.current.value.dark ? 'light' : 'dark'
+    // console.log(store.themeColor)
+    theme.global.name.value = store.themeColor
   }
 </script>
 

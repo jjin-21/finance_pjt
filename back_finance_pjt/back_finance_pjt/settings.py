@@ -94,6 +94,7 @@ AUTHENTICATION_BACKENDS = (
 # REST-AUTH 회원가입 기본 Serailizer 재정의
 REST_AUTH = {
 'REGISTER_SERIALIZER': 'accounts.serializers.CustomRegisterSerializer',
+'TOKEN_SERIALIZER': 'accounts.serializers.CustomTokenSerializer',
 }
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

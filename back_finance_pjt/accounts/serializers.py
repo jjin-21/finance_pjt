@@ -5,6 +5,7 @@ from allauth.account.adapter import get_adapter
 from .models import User
 from dj_rest_auth.registration.serializers import RegisterSerializer
 from dj_rest_auth.serializers import LoginSerializer
+from rest_framework.authtoken.models import Token
 
 
 class CustomRegisterSerializer(RegisterSerializer):
@@ -12,8 +13,9 @@ class CustomRegisterSerializer(RegisterSerializer):
         (0, '남자'),
         (1, '여자'),
     ]
+    email = serializers.EmailField(required=True)
+    phone_num = serializers.CharField(required=True)
     nickname = serializers.CharField(required=True)
-    # phone_num = 
     age = serializers.IntegerField(required=True)
     gender = serializers.ChoiceField(choices=GENDER_CHOICES, required=True)
     asset = serializers.IntegerField(required=False)
@@ -21,6 +23,7 @@ class CustomRegisterSerializer(RegisterSerializer):
     
     def get_cleaned_data(self):
         cleaned_data = super().get_cleaned_data()
+        cleaned_data['phone_num'] = self.validated_data.get('phone_num', '')
         cleaned_data['nickname'] = self.validated_data.get('nickname', '')
         cleaned_data['age'] = self.validated_data.get('age', '')
         cleaned_data['gender'] = self.validated_data.get('gender', '')
@@ -53,3 +56,22 @@ class UserSerializer(serializers.ModelSerializer):
                     'groups',
                     'user_permissions'
                     )
+
+
+class CustomTokenSerializer(serializers.ModelSerializer):
+    username= serializers.SerializerMethodField()
+    nickname= serializers.SerializerMethodField()
+    email= serializers.SerializerMethodField()
+    
+    def get_username(self,obj):
+        return obj.user.username
+    
+    def get_nickname(self,obj):
+        return obj.user.nickname
+
+    def get_email(self,obj):
+        return obj.user.email
+
+    class Meta:
+        model = Token
+        fields = ('key', 'user', 'username','nickname','email')

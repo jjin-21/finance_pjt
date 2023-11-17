@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'boards',
     'exchange_rates',
     'finances',
+    'news',
     'rest_framework',
     'rest_framework.authtoken',
     'dj_rest_auth',

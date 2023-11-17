@@ -25,4 +25,5 @@ urlpatterns = [
     path('boards/', include('boards.urls')),
     path('finances/', include('finances.urls')),
     path('exchange-rates/', include('exchange_rates.urls')),
+    path('news/', include('news.urls')),
 ]

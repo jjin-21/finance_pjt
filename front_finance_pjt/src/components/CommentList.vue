@@ -28,8 +28,12 @@ const store = useCounterStore()
 const comment = ref('');
 
 const props = defineProps ({
-  commentLst: Object
+  commentLst: Object,
+  boardId: String,
 })
+
+
+console.log(props)
 
 // 쉬프트 엔터와 엔터의 구분 함수
 const handleEnter = (event) => {

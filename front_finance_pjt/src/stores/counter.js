@@ -67,13 +67,18 @@ export const useCounterStore = defineStore('counter', () => {
   }
 
   const signUp = function (payload) {
-    const { username, password1, password2 } = payload
+    const {
+      username, password1, password2, nickname, age, gender, asset, salary, email
+     } = payload
 
     axios({
       method: 'post',
       url: `${API_URL}/accounts/signup/`,
       data: {
-        username, password1, password2
+        username, password1, password2, nickname, age, gender, asset, salary, email
+      },
+      headers: {
+        'Content-Type': 'application/json',
       }
     })
       .then((res) => {
@@ -95,6 +100,7 @@ export const useCounterStore = defineStore('counter', () => {
       data: {
         username, password
       }
+      
     })
       .then((res) => {
         // console.log(res)

@@ -9,7 +9,7 @@
       <hr>
       <p>
         <span>
-          좋아요 수 : {{ board.like_users.length }}
+          좋아요 수 : {{ likeCount }}
         </span>
         <span>
           | |
@@ -30,6 +30,7 @@
       <hr>
       <CommentList 
         :commentLst="commentLst"
+        :boardId="boardId"
       />
       <hr>
     </div>
@@ -38,7 +39,7 @@
 
 <script setup>
 import axios from 'axios'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { useCounterStore } from '@/stores/counter'
 import { useRoute, useRouter } from 'vue-router'
 import CommentList from '@/components/CommentList.vue'
@@ -49,8 +50,11 @@ const router = useRouter()
 const board = ref(null)
 const comment = ref(null)
 const commentLst = ref([])
+const likeCount = ref(0)
+const boardId = ref(0)
 
-console.log(route.params.id)
+boardId.value = route.params.id
+// console.log(route.params.id)
 
 onMounted(() => {
   axios({
@@ -106,13 +110,17 @@ const likeBoard = function () {
   })
     .then((res) => {
       console.log(res)
-      router.go(0)
+      likeCount.value = res.data.like_users.length;
     })
     .catch((err) => {
       console.log(err)
       
     })
 }
+
+watch(board, (newBoard) => {
+  likeCount.value = newBoard.like_users.length;
+})
 
 
 </script>

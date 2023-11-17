@@ -1,29 +1,51 @@
 <template>
-  <div>
-    <h5>{{ board.id }}</h5>
-    <p>글쓴이 : {{ board.username }}</p>
-    <RouterLink :to="{ name: 'DetailView', params: { id: board.id }}">
-      <p>제목 : {{ board.title }} [{{ board.comment_set.length }}]</p>
-    </RouterLink>
-    <p>내용 : {{ board.content }}</p>
-    
-    <hr>
-  </div>
+  <v-list-item>
+    <v-list-item-content>
+      <v-list-item-title class="text-h5 mb-2 text-decoration-none">
+        <span @click.prevent="navigateToDetailView">
+          <a href=""  class="text-decoration-none">
+            {{ board.title }} [{{ board.comment_set.length }}]
+          </a>
+        </span>
+      </v-list-item-title>
+      <v-list-item-subtitle>글쓴이: {{ board.username }} | 추천수: {{ board.like_users.length }}</v-list-item-subtitle>
+    </v-list-item-content>
+    <v-divider></v-divider>
+  </v-list-item>
 </template>
 
 <script setup>
-import { useRouter, RouterLink } from 'vue-router'
-import axios from 'axios'
-import { useCounterStore } from '@/stores/counter';
+import { useRouter } from 'vue-router'
+import { defineProps } from 'vue'
 
-const store = useCounterStore()
+
+const props = defineProps({
+  board: Object
+})
 
 const router = useRouter()
 
-const props = defineProps({
-                board: Object
-              })
-
-
-
+const navigateToDetailView = () => {
+  // Optional: Add logic if needed before navigating
+  router.push({ name: 'DetailView', params: { id: props.board.id } })
+}
 </script>
+
+<style scoped>
+.text-h5 {
+  font-size: 1.25rem;
+}
+
+.mb-2 {
+  margin-bottom: 8px;
+}
+
+/* Style for the clickable title */
+.text-h5 .v-list-item__content span {
+  cursor: pointer;
+}
+
+
+</style>
+
+

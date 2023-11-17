@@ -6,7 +6,7 @@
         작성자: {{ comment.username }}
       </div>
       <div>
-        {{ comment.content }}
+        {{ commentContent }}
       </div>      
     </p>
     <p v-if="isUpdating">
@@ -41,7 +41,7 @@ const props = defineProps({
   comment: Object
 })
 
-// console.log(props.comment)
+// console.log(props.comment.board.id)
 
 
 const store = useCounterStore()
@@ -68,8 +68,11 @@ const updateComment = function () {
     }
   })
     .then((res) => {
-      console.log(res)
-      router.go(0)
+      // console.log(res)
+      commentContent.value = res.data.content
+      isUpdating.value = false
+      router.push({name: 'DetailView', params:{id: props.comment.board.id}})
+      // console.log(4)
     })
     .catch((err) => {
       console.log(err)

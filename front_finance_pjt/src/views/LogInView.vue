@@ -1,12 +1,44 @@
 <template>
-  <div>
-    <h1>LogIn</h1>
-    <form @submit.prevent="logIn">
-      <input type="text" v-model.trim="username">
-      <input type="password" v-model.trim="password">
-      <input type="submit">
-    </form>
-  </div>
+  <v-card
+    class="mx-auto"
+    max-width="450"
+    
+    title="User Login"
+  >
+    <v-container>
+      <v-text-field
+        v-model="username"
+        color="primary"
+        label="Username"
+        variant="underlined"
+        @keyup.enter="logIn"
+      ></v-text-field>
+
+      <v-text-field
+        v-model="password"
+        color="primary"
+        label="Password"
+        placeholder="Enter your password"
+        variant="underlined"
+        type="password"
+        @keyup.enter="logIn"
+      ></v-text-field>
+
+     
+    </v-container>
+
+    <v-divider></v-divider>
+
+    <v-card-actions>
+      <v-spacer></v-spacer>
+
+      <v-btn color="success" @click.prevent="logIn">
+        LOGIN
+
+        <v-icon icon="mdi-chevron-right" end></v-icon>
+      </v-btn>
+    </v-card-actions>
+  </v-card>
 </template>
 
 <script setup>

@@ -10,6 +10,7 @@ import KaKaoMapView from '@/views/KaKaoMapView.vue'
 import ExChangeView from '@/views/ExChangeView.vue'
 import ProductView from '@/views/ProductView.vue'
 import UpdateView from '@/views/BoardUpdateView.vue'
+import UserProfileView from '@/views/UserProfileView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -68,6 +69,11 @@ const router = createRouter({
       path: '/boards/:id/update/',
       name: 'UpdateView',
       component: UpdateView
+    },
+    {
+      path: '/users/:id/',
+      name: 'UserProfileView',
+      component: UserProfileView
     }
   ]
 })

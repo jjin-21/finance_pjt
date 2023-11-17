@@ -9,9 +9,12 @@ export const useCounterStore = defineStore('counter', () => {
   const exchanges = ref([])
   const API_URL = 'http://127.0.0.1:8000'
   const token = ref(null)
-  const router = useRouter()
-  const user_name = ref(null)
+  const userName = ref(null)
+  const userNickname = ref(null)
+  const userId = ref(null)
+  const userEmail = ref(null)
   const themeColor = ref('light')
+  const router = useRouter()
 
   const isLogin = computed(() => {
     if (token.value === null) {
@@ -69,14 +72,14 @@ export const useCounterStore = defineStore('counter', () => {
 
   const signUp = function (payload) {
     const {
-      username, password1, password2, nickname, age, gender, asset, salary, email
+      username, password1, password2, nickname, age, gender, asset, salary, email, phone_num
      } = payload
 
     axios({
       method: 'post',
       url: `${API_URL}/accounts/signup/`,
       data: {
-        username, password1, password2, nickname, age, gender, asset, salary, email
+        username, password1, password2, nickname, age, gender, asset, salary, email, phone_num
       },
       headers: {
         'Content-Type': 'application/json',
@@ -107,8 +110,10 @@ export const useCounterStore = defineStore('counter', () => {
         // console.log(res)
         console.log(res.data)
         token.value = res.data.key
-        console.log(username)
-        user_name.value = username
+        userName.value = res.data.username
+        userNickname.value = res.data.nickname
+        userId.value = res.data.user
+        userEmail.value = res.data.email
         router.push({ name : 'HomeView'})
       })
       .catch((err) => {
@@ -129,7 +134,10 @@ export const useCounterStore = defineStore('counter', () => {
         })
             .then((res) => {
                 token.value = null;
-                user_name.value = null;
+                userName.value = null;
+                userNickname.value = null;
+                userEmail.value = null;
+                userId.value = null;
                 window.alert('로그아웃이 완료 되었습니다.');
                 console.log(res);
             })
@@ -144,5 +152,5 @@ export const useCounterStore = defineStore('counter', () => {
 
 
 
-  return { boards, themeColor, exchanges, API_URL, getBoards, signUp, logIn, getExChange, token, isLogin, user_name, logOut, updateExChange}
+  return { userName, userNickname, userId, userEmail, boards, themeColor, exchanges, API_URL, getBoards, signUp, logIn, getExChange, token, isLogin, logOut, updateExChange}
 }, { persist: true })

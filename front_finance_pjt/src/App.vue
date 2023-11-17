@@ -35,9 +35,9 @@
 
         <v-btn
           v-show="store.isLogin"
-          v-text="store.user_name"
-          
-        ></v-btn>
+          v-text="store.userName"
+          :to="{name: 'UserProfileView', params: {id: store.userId}}"
+        > </v-btn>
 
         <v-btn
           v-show="store.isLogin"

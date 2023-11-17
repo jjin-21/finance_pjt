@@ -30,11 +30,19 @@
         type="password"
       ></v-text-field>
 
+      
       <v-text-field
-        v-model="email"
+      v-model="email"
+      color="primary"
+      label="Email"
+      placeholder="Enter your email"
+      variant="underlined"
+      ></v-text-field>
+
+      <v-text-field
+        v-model="phonenum"
         color="primary"
-        label="Email"
-        placeholder="Enter your email"
+        label="PhoneNumber"
         variant="underlined"
       ></v-text-field>
         
@@ -43,15 +51,6 @@
         color="primary"
         label="Nickname"
         variant="underlined"
-      ></v-text-field>
-
-      <v-text-field
-        v-model="age"
-        color="primary"
-        label="Age"
-        placeholder="숫자만 입력해주세요"
-        variant="underlined"
-        type="number"
       ></v-text-field>
       
       <v-select
@@ -62,6 +61,16 @@
         placeholder="Select Gender"
         variant="underlined"
       ></v-select>
+
+      <v-text-field
+        v-model="age"
+        color="primary"
+        label="Age"
+        placeholder="숫자만 입력해주세요"
+        variant="underlined"
+        type="number"
+      ></v-text-field>
+      
 
       <v-text-field
       v-model="asset"
@@ -114,6 +123,7 @@ const gender = ref(null)
 const asset = ref(null)
 const salary = ref(null)
 const email = ref(null)
+const phonenum = ref(null)
 
 const genderSelected = ref(null)
 
@@ -133,7 +143,8 @@ const signUp = function () {
     gender: gender.value,
     asset: asset.value,
     salary: salary.value,
-    email: email.value
+    email: email.value,
+    phone_num: phonenum.value
   }
   
   store.signUp(payload)

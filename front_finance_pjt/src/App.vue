@@ -36,7 +36,7 @@
         <v-btn
           v-show="store.isLogin"
           v-text="store.userName"
-          :to="{name: 'UserProfileView', params: {id: store.userId}}"
+          :to="{name: 'UserProfileView'}"
         > </v-btn>
 
         <v-btn
@@ -91,7 +91,27 @@
           </v-col>
         </v-row>
       </v-container>
+      <v-footer app>
+        <v-row justify="center" no-gutters>
+          <v-btn
+            v-for="link in links"
+            :key="link"
+            
+            variant="text"
+            class="mx-2"
+            rounded="xl"
+          >
+            {{ link }}
+          </v-btn>
+          <v-col class="text-center mt-4" cols="12">
+            {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
+          </v-col>
+        </v-row>
+      </v-footer>
+
     </v-main>
+
+    
   </v-app>
 </template>
 
@@ -99,6 +119,15 @@
   import { useTheme } from 'vuetify'
   import { useCounterStore } from './stores/counter';
   import { onMounted } from 'vue';
+
+  const links = [
+        'Home',
+        'About Us',
+        'Team',
+        'Services',
+        'Blog',
+        'Contact Us',
+      ]
 
 
   // 다크모드 라이트모드 고정부분

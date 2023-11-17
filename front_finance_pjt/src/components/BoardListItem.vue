@@ -1,17 +1,19 @@
 <template>
-  <v-list-item>
-    <v-list-item-content>
-      <v-list-item-title class="text-h5 mb-2 text-decoration-none">
-        <span @click.prevent="navigateToDetailView">
-          <a href=""  class="text-decoration-none">
-            {{ board.title }} [{{ board.comment_set.length }}]
-          </a>
-        </span>
-      </v-list-item-title>
-      <v-list-item-subtitle>글쓴이: {{ board.username }} | 추천수: {{ board.like_users.length }}</v-list-item-subtitle>
-    </v-list-item-content>
-    <v-divider></v-divider>
-  </v-list-item>
+  <v-list>
+    <v-list-item>
+      <v-list-item-content>
+        <v-list-item-title class="text-h5 mb-2">
+          <span @click.prevent="navigateToDetailView">
+            <a href="" class="text-decoration-none">
+              {{ board.title }} [{{ board.comment_set.length }}]
+            </a>
+          </span>
+        </v-list-item-title>
+        <v-list-item-subtitle>글쓴이: {{ board.username }} | 추천수: {{ board.like_users.length }}</v-list-item-subtitle>
+      </v-list-item-content>
+      <v-divider></v-divider>
+    </v-list-item>
+  </v-list>
 </template>
 
 <script setup>

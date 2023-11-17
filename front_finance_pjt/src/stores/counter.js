@@ -15,6 +15,7 @@ export const useCounterStore = defineStore('counter', () => {
   const userEmail = ref(null)
   const themeColor = ref('light')
   const router = useRouter()
+  
 
   const isLogin = computed(() => {
     if (token.value === null) {
@@ -144,13 +145,17 @@ export const useCounterStore = defineStore('counter', () => {
             .catch((err) => {
                 console.log(err);
             });
-    } else {
-        // 사용자가 "아니오"를 선택한 경우 또는 창을 닫은 경우
-        // 추가적인 처리가 필요한 경우 여기에 코드를 추가
-    }
-};
+      } else {
+          // 사용자가 "아니오"를 선택한 경우 또는 창을 닫은 경우
+          // 추가적인 처리가 필요한 경우 여기에 코드를 추가
+        }
+
+   
+    };
+
+  
 
 
 
-  return { userName, userNickname, userId, userEmail, boards, themeColor, exchanges, API_URL, getBoards, signUp, logIn, getExChange, token, isLogin, logOut, updateExChange}
+  return {  userName, userNickname, userId, userEmail, boards, themeColor, exchanges, API_URL, getBoards, signUp, logIn, getExChange, token, isLogin, logOut, updateExChange}
 }, { persist: true })

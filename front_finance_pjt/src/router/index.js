@@ -11,6 +11,7 @@ import ExChangeView from '@/views/ExChangeView.vue'
 import ProductView from '@/views/ProductView.vue'
 import UpdateView from '@/views/BoardUpdateView.vue'
 import UserProfileView from '@/views/UserProfileView.vue'
+import UserProfileEditView from '@/views/UserProfileEditView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -71,9 +72,14 @@ const router = createRouter({
       component: UpdateView
     },
     {
-      path: '/users/:id/',
+      path: '/users/',
       name: 'UserProfileView',
       component: UserProfileView
+    },
+    {
+      path: '/users/:id/edit',
+      name: 'UserProfileEditView',
+      component: UserProfileEditView
     }
   ]
 })

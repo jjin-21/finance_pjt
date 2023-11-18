@@ -23,6 +23,7 @@ class SavingOptionsSerializer(serializers.ModelSerializer):
 
 
 class SavingProductsSerializer(serializers.ModelSerializer):
+    saving_options = SavingOptionsSerializer(many=True, read_only=True)
     class Meta():
         model = SavingProducts
         fields = '__all__'

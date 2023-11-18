@@ -5,6 +5,8 @@ from rest_framework.response import Response
 from rest_framework import status
 import requests
 
+from accounts.models import User
+from accounts.serializers import UserSerializer
 from .models import DepositOptions, DepositProducts, SavingOptions, SavingProducts
 from .serializers import DepositOptionsSerializer, DepositProductsSerializer, SavingProductsSerializer, SavingOptionsSerializer
 
@@ -115,3 +117,37 @@ def saving_product_options(request, fin_prdt_cd):
     options = SavingOptions.objects.filter(fin_prdt_cd=fin_prdt_cd)
     serializer = SavingOptionsSerializer(options, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['GET', 'POST'])
+def deposit_detail(request, fin_prdt_cd):
+    if request.method == 'GET':
+        product = DepositProducts.objects.get(fin_prdt_cd=fin_prdt_cd)
+        serializer = DepositProductsSerializer(product)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    elif request.method == "POST":
+        product = DepositProducts.objects.get(fin_prdt_cd=fin_prdt_cd)
+        if request.user in product.joined_deposit.all():
+            product.joined_deposit.remove(request.user)
+        else:
+            product.joined_deposit.add(request.user)
+        serializer = UserSerializer(request.user)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+@api_view(['GET', 'POST'])
+def saving_detail(request, fin_prdt_cd):
+    if request.method == 'GET':
+        product = SavingProducts.objects.get(fin_prdt_cd=fin_prdt_cd)
+        serializer = SavingProductsSerializer(product)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    elif request.method == "POST":
+        product = SavingProducts.objects.get(fin_prdt_cd=fin_prdt_cd)
+        if request.user in product.joined_saving.all():
+            product.joined_saving.remove(request.user)
+        else:
+            product.joined_saving.add(request.user)
+        serializer = UserSerializer(request.user)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+

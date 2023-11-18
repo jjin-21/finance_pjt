@@ -27,6 +27,10 @@
         <v-btn
           :to="{name: 'ProductView'}"
         >Product</v-btn>
+
+        <v-btn
+          :to="{name: 'NewsView'}"
+        >News</v-btn>
         
 
         <v-spacer></v-spacer>
@@ -72,7 +76,7 @@
       <v-container fluid class="pa-0">
         <v-row no-gutters>
           <v-col cols="2">
-            <v-sheet min-height="150vh" rounded="0">
+            <v-sheet min-height="150vh"  rounded="0">
               <!-- ... (좌측 컬럼 내용) ... -->
               
             </v-sheet>

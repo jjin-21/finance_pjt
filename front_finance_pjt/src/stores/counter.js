@@ -7,6 +7,10 @@ import axios from 'axios'
 export const useCounterStore = defineStore('counter', () => {
   const boards = ref([])
   const exchanges = ref([])
+  const dProducts = ref([])
+  const sProducts = ref([])
+  const dNewses = ref([])
+  const sNewses = ref([])
   const API_URL = 'http://127.0.0.1:8000'
   const token = ref(null)
   const userName = ref(null)
@@ -65,6 +69,68 @@ export const useCounterStore = defineStore('counter', () => {
       .then((res) => {
         console.log(res)
         exchanges.value = res.data
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
+  // DRF에 deposit products 조회 요청 
+  const getDeposits = function() {
+    axios({
+      method: 'get',
+      url: `${API_URL}/finances/deposit-products/`      
+    })
+      .then((res) =>{
+        console.log(res)
+        dProducts.value = res.data
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
+  // DRF에 saving products 조회 요청 
+  const getSavings = function() {
+    axios({
+      method: 'get',
+      url: `${API_URL}/finances/saving-products/`
+      
+    })
+      .then((res) =>{
+        console.log(res)
+        sProducts.value = res.data
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
+  // 예금 뉴스 가져오는 함수
+  const getDepositNews = function() {
+    axios({
+      method: 'get',
+      url: `${API_URL}/news/deposit/`
+    })
+      .then((res) =>{
+        console.log(res)
+        dNewses.value = res.data
+        console.log("dNewses")
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
+  // 적금 뉴스 가져오는 함수
+  const getSavingNews = function() {
+    axios({
+      method: 'get',
+      url: `${API_URL}/news/saving/`
+    })
+      .then((res) =>{
+        console.log(res)
+        sNewses.value = res.data
       })
       .catch((err) => {
         console.log(err)
@@ -177,5 +243,8 @@ export const useCounterStore = defineStore('counter', () => {
 
 
 
-  return { editProfile, userName, userNickname, userId, userEmail, boards, themeColor, exchanges, API_URL, getBoards, signUp, logIn, getExChange, token, isLogin, logOut, updateExChange}
+  return { editProfile, userName, userNickname, userId, userEmail, boards, themeColor, exchanges, API_URL, getBoards, signUp, logIn, getExChange, token, isLogin, logOut, updateExChange, 
+    getDeposits, dProducts, getSavings, sProducts,
+    getSavingNews, sNewses, getDepositNews, dNewses
+  }
 }, { persist: true })

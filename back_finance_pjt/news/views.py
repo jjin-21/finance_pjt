@@ -4,6 +4,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.conf import settings
+import json
 
 # Create your views here.
 client_id = "CYv34EtcXhZ6vin_mvaa"
@@ -21,7 +22,7 @@ def deposit(request):
     rescode = response.getcode()
     if(rescode==200):
         response_body = response.read()
-        return Response(response_body.decode('utf-8'), status=status.HTTP_200_OK)
+        return Response(json.loads(response_body.decode('utf-8')), status=status.HTTP_200_OK)
     else:
         return Response({"message": "조회에 실패했습니다."}, status=status.HTTP_404_NOT_FOUND)
 
@@ -36,6 +37,6 @@ def saving(request):
     rescode = response.getcode()
     if(rescode==200):
         response_body = response.read()
-        return Response(response_body.decode('utf-8'), status=status.HTTP_200_OK)
+        return Response(json.loads(response_body.decode('utf-8')), status=status.HTTP_200_OK)
     else:
         return Response({"message": "조회에 실패했습니다."}, status=status.HTTP_404_NOT_FOUND)

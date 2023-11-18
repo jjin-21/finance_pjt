@@ -79,8 +79,8 @@
     <v-card-actions>
       <v-spacer></v-spacer>
 
-      <v-btn color="success" @click.prevent="signUp">
-        Complete Registration
+      <v-btn color="success" @click.prevent="editProfile">
+        Edit Profile
 
         <v-icon icon="mdi-chevron-right" end></v-icon>
       </v-btn>
@@ -89,14 +89,15 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 import { useCounterStore } from '@/stores/counter'
 import { storeToRefs } from 'pinia';
+import axios from 'axios'
 
 const store = useCounterStore()
 
-const username = ref(null)
 
+const username = ref(null)
 const nickname = ref(null)
 const age = ref(null)
 const gender = ref(null)
@@ -113,7 +114,33 @@ const genderOptions = ref([
 
 
 
-const signUp = function () {
+onMounted(() => {
+  axios({
+    method: 'get',
+    url: `${store.API_URL}/accounts/profile/${store.userId}`
+  })
+    .then((res) => {
+      console.log(res)
+      console.log(res.data)
+      username.value = res.data.username
+      nickname.value = res.data.nickname
+      email.value = res.data.email
+      phonenum.value = res.data.phone_num
+      gender.value = res.data.gender
+      age.value = res.data.age
+      asset.value = res.data.asset
+      salary.value = res.data.salary
+      genderSelected.value = res.data.gender === 0 ? 'Male' : 'Female'
+      
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+})
+
+
+
+const editProfile = function () {
   const payload = {
     username: username.value,
     nickname: nickname.value,
@@ -124,9 +151,14 @@ const signUp = function () {
     email: email.value,
     phone_num: phonenum.value
   }
+  console.log(payload.username)
   
-  store.signUp(payload)
+  store.editProfile(payload)
 }
+
+
+
+
 
 watch(genderSelected, (newGenderSelected) => {
   gender.value = newGenderSelected === 'Male' ? 0 : 1;

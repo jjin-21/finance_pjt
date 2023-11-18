@@ -17,7 +17,7 @@
     </span>
     <span> || </span>
     <span>
-      <button>[Delete]</button>
+      <button @click.prevnet="deleteProfile">[Delete]</button>
     </span>
   </div>
 </template>
@@ -66,6 +66,18 @@ const editProfile = function () {
     }
   })
 }
+
+const deleteProfile = function () {
+  router.push({
+    name: 'UserProfileDeleteView',
+    params: {
+      id: store.userId
+    }
+  })
+}
+
+
+
 
 </script>
 

@@ -1,8 +1,9 @@
 <template>
-  <v-card
+  <v-card 
     class="mx-auto"
-    max-width="450"
-    
+    style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);"
+    min-width="450"
+    min-height="350"
     title="User Login"
   >
     <v-container>

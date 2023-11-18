@@ -91,7 +91,7 @@
           </v-col>
         </v-row>
       </v-container>
-      <v-footer app>
+      <v-footer color="grey-lighten-4" app>
         <v-row justify="center" no-gutters>
           <v-btn
             v-for="link in links"

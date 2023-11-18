@@ -123,39 +123,59 @@ export const useCounterStore = defineStore('counter', () => {
   }
 
   const logOut = function () {
-    const userConfirmed = window.confirm('로그아웃하시겠습니까?');
-
-    if (userConfirmed) {
-        axios({
-            method: 'post',
-            url: `${API_URL}/accounts/logout/`,
-            // headers: {
-            //   Authorization: `Token ${token.value}`
-            // }
+    
+    axios({
+        method: 'post',
+        url: `${API_URL}/accounts/logout/`,
+        // headers: {
+        //   Authorization: `Token ${token.value}`
+        // }
+    })
+        .then((res) => {
+            token.value = null;
+            userName.value = null;
+            userNickname.value = null;
+            userEmail.value = null;
+            userId.value = null;
+            console.log(res);
+            router.push('/home')
         })
-            .then((res) => {
-                token.value = null;
-                userName.value = null;
-                userNickname.value = null;
-                userEmail.value = null;
-                userId.value = null;
-                window.alert('로그아웃이 완료 되었습니다.');
-                console.log(res);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-      } else {
-          // 사용자가 "아니오"를 선택한 경우 또는 창을 닫은 경우
-          // 추가적인 처리가 필요한 경우 여기에 코드를 추가
-        }
+        .catch((err) => {
+            console.log(err);
+        });
+      
 
    
-    };
+    }
+
+    const editProfile = function (payload) {
+      axios({
+        method: 'put',
+        url: `${API_URL}/accounts/profile/${userId.value}/`,
+        data: {
+          username: payload.username,
+          nickname: payload.nickname,
+          age: payload.age,
+          gender: payload.gender,
+          asset: payload.asset,
+          salary: payload.salary,
+          email: payload.email,
+          phone_num: payload.phone_num
+        }
+      })
+        .then((res) => {
+          console.log(res)
+          userEmail.value = payload.email
+          userNickname.value = payload.nickname
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
 
   
 
 
 
-  return {  userName, userNickname, userId, userEmail, boards, themeColor, exchanges, API_URL, getBoards, signUp, logIn, getExChange, token, isLogin, logOut, updateExChange}
+  return { editProfile, userName, userNickname, userId, userEmail, boards, themeColor, exchanges, API_URL, getBoards, signUp, logIn, getExChange, token, isLogin, logOut, updateExChange}
 }, { persist: true })

@@ -12,6 +12,7 @@ import ProductView from '@/views/ProductView.vue'
 import UpdateView from '@/views/BoardUpdateView.vue'
 import UserProfileView from '@/views/UserProfileView.vue'
 import UserProfileEditView from '@/views/UserProfileEditView.vue'
+import UserProfileDeleteView from '@/views/UserProfileDeleteView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -80,6 +81,11 @@ const router = createRouter({
       path: '/users/:id/edit',
       name: 'UserProfileEditView',
       component: UserProfileEditView
+    },
+    {
+      path: '/users/:id/delete',
+      name: 'UserProfileDeleteView',
+      component: UserProfileDeleteView
     }
   ]
 })

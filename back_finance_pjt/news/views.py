@@ -3,10 +3,11 @@ import urllib.request
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from django.conf import settings
 
 # Create your views here.
 client_id = "CYv34EtcXhZ6vin_mvaa"
-client_secret = "YHwJY0Xu1l"
+client_secret = settings.NAVER_API_KEY
 base_url = "https://openapi.naver.com/v1/search/news.json?query="
 
 @api_view(['GET'])

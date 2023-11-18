@@ -24,6 +24,7 @@ environ.Env.read_env(
 )
 API_KEY = env('API_KEY')
 RATE_API_KEY = env('RATE_API_KEY')
+NAVER_API_KEY= env('NAVER_API_KEY')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/

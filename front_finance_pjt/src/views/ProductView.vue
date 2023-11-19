@@ -44,6 +44,7 @@ onMounted(() => {
   showSaving.value = false
   // store.saveProducts()
   store.getDeposits()
+  store.getSavings()
 
 })
 

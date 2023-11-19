@@ -83,6 +83,8 @@ export const useCounterStore = defineStore('counter', () => {
     })
       .then((res) => {
         console.log(res)
+        window.alert("상품 정보를 불러왔습니다")
+        router.go(0)
       })
       .catch((res) => {
         console.log(err)

@@ -50,7 +50,7 @@ const navigateToSavingDetails = (productId) => {
 
 
 onMounted(() => {
-  depositProductList.value = store.dProducts
+  depositProductList.value = store.sProducts
 })
 
 

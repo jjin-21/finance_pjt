@@ -95,7 +95,7 @@
           </v-col>
         </v-row>
       </v-container>
-      <v-footer color="grey-lighten-4" app>
+      <v-footer :color="store.themeColor === 'dark' ? 'grey-darken-3' : 'grey-lighten-4'" app>
         <v-row justify="center" no-gutters>
           <v-btn
             v-for="link in links"

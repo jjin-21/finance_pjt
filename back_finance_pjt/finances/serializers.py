@@ -93,6 +93,7 @@ class SavingProductsSerializer(serializers.ModelSerializer):
     
     def get_intr_rate_type_nm(self, obj):
         fin_prdt_cd = obj.fin_prdt_cd
+        print(fin_prdt_cd)
         intr_rate_type_nm = obj.saving_options.filter(fin_prdt_cd=fin_prdt_cd)[0].intr_rate_type_nm
         return intr_rate_type_nm
     def get_term_6(self, obj):
@@ -117,12 +118,12 @@ class SavingProductsSerializer(serializers.ModelSerializer):
                 tmp.append(rate)
             return max(tmp)
         else:
-            rate = options.get(save_trm=6).intr_rate2 if len(options.filter(save_trm=12)) > 0 else "-"
+            rate = options.get(save_trm=12).intr_rate2 if len(options.filter(save_trm=12)) > 0 else "-"
             return rate
     def get_term_24(self, obj):
         fin_prdt_cd = obj.fin_prdt_cd
         options = obj.saving_options.filter(fin_prdt_cd=fin_prdt_cd)
-        if len(options.filter(save_trm=12)) > 1:
+        if len(options.filter(save_trm=24)) > 1:
             tmp = []
             for item in options.filter(save_trm=24):
                 rate = item.intr_rate2

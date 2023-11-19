@@ -20,6 +20,11 @@
       <button @click.prevnet="deleteProfile">[Delete]</button>
     </span>
   </div>
+  <div>
+    <span>
+      <button @click.prevent="changePassword">[Change Password]</button>
+    </span>
+  </div>
 </template>
 
 <script setup>
@@ -70,6 +75,15 @@ const editProfile = function () {
 const deleteProfile = function () {
   router.push({
     name: 'UserProfileDeleteView',
+    params: {
+      id: store.userId
+    }
+  })
+}
+
+const changePassword = function () {
+  router.push({
+    name: 'UserProfileChangePasswordView',
     params: {
       id: store.userId
     }

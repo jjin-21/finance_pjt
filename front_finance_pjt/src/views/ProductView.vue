@@ -11,6 +11,9 @@
         <v-col>
           <v-btn @click="showSavingList">적금 목록</v-btn>
         </v-col>
+        <v-col>
+          <v-btn @click="store.saveProducts">예적금 목록 불러오기</v-btn>
+        </v-col>
       </v-row>
 
       <v-row>
@@ -27,15 +30,21 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import { useCounterStore } from '@/stores/counter';
 
 import ProductDepositList from "@/components/ProductDepositList.vue";
 import ProductSavingList from "@/components/ProductSavingList.vue";
 
 const showDeposit = ref(false);
 const showSaving = ref(false);
+const store = useCounterStore()
+
 onMounted(() => {
   showDeposit.value = false
   showSaving.value = false
+  // store.saveProducts()
+  store.getDeposits()
+
 })
 
 

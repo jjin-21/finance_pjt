@@ -14,6 +14,9 @@ import UserProfileView from '@/views/UserProfileView.vue'
 import UserProfileEditView from '@/views/UserProfileEditView.vue'
 import UserProfileDeleteView from '@/views/UserProfileDeleteView.vue'
 import NewsView from '@/views/NewsView.vue'
+import ProductDepositView from '@/views/ProductDepositView.vue'
+import ProductSavingView from '@/views/ProductSavingView.vue'
+import UserProfileChangePasswordView from '@/views/UserProfileChangePasswordView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -89,9 +92,24 @@ const router = createRouter({
       component: UserProfileDeleteView
     },
     {
+      path: '/users/:id/change-password',
+      name: 'UserProfileChangePasswordView',
+      component: UserProfileChangePasswordView
+    },
+    {
       path: '/news/',
       name: 'NewsView',
       component: NewsView
+    },
+    {
+      path: '/product/deposit/:id/',
+      name: 'ProductDepositView',
+      component: ProductDepositView
+    },
+    {
+      path: '/product/saving/:id/',
+      name: 'ProductSavingView',
+      component: ProductSavingView
     }
   ]
 })

@@ -75,6 +75,20 @@ export const useCounterStore = defineStore('counter', () => {
       })
   }
 
+  // 백엔드 db에 api 불러와서 금융상품 저장
+  const saveProducts = function() {
+    axios({
+      method: 'get',
+      url: `${API_URL}/finances/save-products/`
+    })
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((res) => {
+        console.log(err)
+      })
+  }
+
   // DRF에 deposit products 조회 요청 
   const getDeposits = function() {
     axios({
@@ -244,7 +258,7 @@ export const useCounterStore = defineStore('counter', () => {
 
 
   return { editProfile, userName, userNickname, userId, userEmail, boards, themeColor, exchanges, API_URL, getBoards, signUp, logIn, getExChange, token, isLogin, logOut, updateExChange, 
-    getDeposits, dProducts, getSavings, sProducts,
+    getDeposits, dProducts, getSavings, sProducts, saveProducts,
     getSavingNews, sNewses, getDepositNews, dNewses
   }
 }, { persist: true })

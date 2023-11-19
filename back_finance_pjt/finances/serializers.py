@@ -9,7 +9,7 @@ class DepositOptionsSerializer(serializers.ModelSerializer):
 
 
 class DepositProductsSerializer(serializers.ModelSerializer):
-    deposit_options = DepositOptionsSerializer(many=True, read_only=True)
+    # deposit_options = DepositOptionsSerializer(many=True, read_only=True)
     intr_rate_type_nm = serializers.SerializerMethodField()
     term_6 = serializers.SerializerMethodField()
     term_12 = serializers.SerializerMethodField()
@@ -81,7 +81,7 @@ class SavingOptionsSerializer(serializers.ModelSerializer):
 
 
 class SavingProductsSerializer(serializers.ModelSerializer):
-    saving_options = SavingOptionsSerializer(many=True, read_only=True)
+    # saving_options = SavingOptionsSerializer(many=True, read_only=True)
     intr_rate_type_nm = serializers.SerializerMethodField()
     term_6 = serializers.SerializerMethodField()
     term_12 = serializers.SerializerMethodField()

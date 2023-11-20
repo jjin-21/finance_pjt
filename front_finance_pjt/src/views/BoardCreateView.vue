@@ -88,7 +88,8 @@ const createBoard = function () {
   })
     .then((res) => {
       // console.log(res)
-      router.push({ name: 'BoardView' })
+      const newBoardId = res.data.id
+      router.push({ name: 'DetailView', params: { id: newBoardId } })
     })
     .catch((err) => {
       console.log(err)

@@ -9,22 +9,31 @@
     <p>Gender: {{ genderType }}</p>
     <p>Asset: {{ profileData.asset }}</p>
     <p>Salary: {{ profileData.salary }}</p>
+    <hr>
+    <div>
+      <span>
+        <button @click.prevent="editProfile">[Edit]</button>
+      </span>
+      <span> || </span>
+      <span>
+        <button @click.prevnet="deleteProfile">[Delete]</button>
+      </span>
+    </div>
+    <div>
+      <span>
+        <button @click.prevent="changePassword">[Change Password]</button>
+      </span>
+    </div>
+    <hr>
+    <br>
+    <v-btn :to="({name: 'UserProfileProductView', params: {id: store.userId}})">
+      <h3>내가 담은 상품</h3>
+    </v-btn>
+    
+
+
   </div>
-  <hr>
-  <div>
-    <span>
-      <button @click.prevent="editProfile">[Edit]</button>
-    </span>
-    <span> || </span>
-    <span>
-      <button @click.prevnet="deleteProfile">[Delete]</button>
-    </span>
-  </div>
-  <div>
-    <span>
-      <button @click.prevent="changePassword">[Change Password]</button>
-    </span>
-  </div>
+  
 </template>
 
 <script setup>

@@ -33,11 +33,11 @@ const router = useRouter()
 console.log(store.dProducts)
 const headers =  [
         { title: '은행', align: 'start', sortable: true, key: 'kor_co_nm' },
-        { title: '상품', align: 'end', sortable: false, key: 'fin_prdt_nm' },
-        { title: '6개월 금리', align: 'end', sortable: true, key: 'term_6' },
-        { title: '12개월 금리', align: 'end', sortable: true, key: 'term_12' },
-        { title: '24개월 금리', align: 'end', sortable: true, key: 'term_24' },
-        { title: '36개월 금리', align: 'end', sortable: true, key: 'term_36' }
+        { title: '상품', align: 'start', sortable: false, key: 'fin_prdt_nm' },
+        { title: '6개월 금리', align: 'start', sortable: true, key: 'term_6' },
+        { title: '12개월 금리', align: 'start', sortable: true, key: 'term_12' },
+        { title: '24개월 금리', align: 'start', sortable: true, key: 'term_24' },
+        { title: '36개월 금리', align: 'start', sortable: true, key: 'term_36' }
       ]
 
 

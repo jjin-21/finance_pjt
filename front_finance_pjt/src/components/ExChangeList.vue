@@ -51,6 +51,7 @@ export default {
       const store = useCounterStore();
       store.updateExChange();
       this.exchangeList = store.exchanges.filter(exchange => exchange.cur_unit !== 'KRW');
+      
     },
   },
   mounted() {

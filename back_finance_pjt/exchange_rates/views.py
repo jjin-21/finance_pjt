@@ -19,24 +19,27 @@ def save(request):
         URL = 'https://www.koreaexim.go.kr/site/program/financial/exchangeJSON'
         params = {
             'authkey': settings.RATE_API_KEY,
-            # 'searchdate': '20231117',
+            # 'searchdate': '20231111',
             'data': 'AP01'
         }
 
         response = requests.get(URL, params=params).json()
         # ExchangeRate.objects.all().delete()
+        print(response)
+        rate_data =ExchangeRate.objects.all()
+        # print(bool(rate_data))
+        if rate_data:
+            rate_data.delete()
+            
         for info in response:
-            rate_data = ExchangeRate.objects.filter(cur_unit = info["cur_unit"])
-            print(rate_data[0])
-            if info["deal_bas_r"] != rate_data[0].deal_bas_r:
-                rate_data.delete()
-                if "," in info["deal_bas_r"]:
-                    info["deal_bas_r"] = info["deal_bas_r"].replace(",","")
-                    info["tts"] = info["tts"].replace(",","")
-                    info["ttb"] = info["ttb"].replace(",","")
-                serializer = ExchangeRateSerializer(data=info)
-                if serializer.is_valid():
-                    serializer.save()
+
+            if "," in info["deal_bas_r"]:
+                info["deal_bas_r"] = info["deal_bas_r"].replace(",","")
+                info["tts"] = info["tts"].replace(",","")
+                info["ttb"] = info["ttb"].replace(",","")
+            serializer = ExchangeRateSerializer(data=info)
+            if serializer.is_valid():
+                serializer.save()
         return Response({'message': "Good!"}, status=status.HTTP_201_CREATED)
 
 

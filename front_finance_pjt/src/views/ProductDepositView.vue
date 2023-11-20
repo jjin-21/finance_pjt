@@ -7,6 +7,13 @@
     <p>{{ productDetail.join_member }}</p>
     <p>{{ productDetail.join_way }}</p>
     <div v-if="productDetail.etc_note" v-html="productDetail.etc_note"></div>
+    <v-btn
+        class="ma-2"
+        variant="text"
+        icon="mdi-thumb-up"
+        color="blue-lighten-2"
+        @click="addProductToCart"
+      ></v-btn>
   </div>
 </template>
 
@@ -33,6 +40,22 @@ onMounted(async () => {
     console.error(error);
   }
 });
+
+const addProductToCart = function () {
+  axios({
+    method: 'post',
+    url: `${store.API_URL}/finances/deposit-product/${route.params.id}/`,
+    headers: {
+      Authorization: `Token ${store.token}`
+    }
+  })
+    .then((res) => {
+      console.log(res)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+}
 
 </script>
 

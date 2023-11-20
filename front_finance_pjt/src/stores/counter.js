@@ -18,6 +18,21 @@ export const useCounterStore = defineStore('counter', () => {
   const userId = ref(null)
   const userEmail = ref(null)
   const themeColor = ref('light')
+
+  // 예 적금 표기관련
+  const showDeposit = ref(false)
+  const showSaving = ref(false)
+  const showDepositList = () => {
+    showDeposit.value = true;
+    showSaving.value = false;
+  };
+  const showSavingList = () => {
+    showDeposit.value = false;
+    showSaving.value = true;
+  };
+  //
+  
+  
   const router = useRouter()
   
 
@@ -54,6 +69,8 @@ export const useCounterStore = defineStore('counter', () => {
       .then((res) => {
         console.log(res)
         router.push({name: 'ExChangeView'})
+        window.alert("상품 정보를 불러왔습니다")
+        router.go(0)
       })
       .catch((err) => {
         console.log(err)
@@ -201,6 +218,7 @@ export const useCounterStore = defineStore('counter', () => {
       })
       .catch((err) => {
         console.log(err)
+        window.alert("ID PASSWORD를 확인해 주세요")
       })
   }
 
@@ -261,6 +279,7 @@ export const useCounterStore = defineStore('counter', () => {
 
   return { editProfile, userName, userNickname, userId, userEmail, boards, themeColor, exchanges, API_URL, getBoards, signUp, logIn, getExChange, token, isLogin, logOut, updateExChange, 
     getDeposits, dProducts, getSavings, sProducts, saveProducts,
-    getSavingNews, sNewses, getDepositNews, dNewses
+    getSavingNews, sNewses, getDepositNews, dNewses,
+    showDeposit, showDepositList, showSaving, showSavingList
   }
 }, { persist: true })

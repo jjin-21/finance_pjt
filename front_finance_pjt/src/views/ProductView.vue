@@ -17,10 +17,10 @@
       </v-row>
 
       <v-row>
-        <v-col v-if="showDeposit">
+        <v-col v-if="store.showDeposit">
           <ProductDepositList />
         </v-col>
-        <v-col v-if="showSaving">
+        <v-col v-if="store.showSaving">
           <ProductSavingList />
         </v-col>
       </v-row>
@@ -35,13 +35,10 @@ import { useCounterStore } from '@/stores/counter';
 import ProductDepositList from "@/components/ProductDepositList.vue";
 import ProductSavingList from "@/components/ProductSavingList.vue";
 
-const showDeposit = ref(false);
-const showSaving = ref(false);
+
 const store = useCounterStore()
 
 onMounted(() => {
-  showDeposit.value = false
-  showSaving.value = false
   // store.saveProducts()
   store.getDeposits()
   store.getSavings()
@@ -50,13 +47,11 @@ onMounted(() => {
 
 
 const showDepositList = () => {
-  showDeposit.value = true;
-  showSaving.value = false;
+  store.showDepositList()
 };
 
 const showSavingList = () => {
-  showDeposit.value = false;
-  showSaving.value = true;
+  store.showSavingList()
 };
 
 </script>

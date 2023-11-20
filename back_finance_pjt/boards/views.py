@@ -42,7 +42,7 @@ def board_detail(request, board_pk):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
     elif request.method == 'PUT':
-        serializer = BoardSerializer(board, data=request.data, partial=True)
+        serializer = BoardSerializer(board, data=request.data, context={'request': request}, partial=True)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_202_ACCEPTED)

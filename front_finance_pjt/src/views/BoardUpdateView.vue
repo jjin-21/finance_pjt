@@ -28,7 +28,12 @@
                   ></v-textarea>
                 </v-col>
               </v-row>
-              <v-row>
+              <!-- <v-row>
+                <v-col>
+                  <input type="file" @change="onFileSelected">
+                </v-col>
+              </v-row>
+              <v-row> -->
                 <v-col>
                   <v-btn type="submit" color="primary">수정 완료</v-btn>
                 </v-col>
@@ -49,6 +54,7 @@ import { useRouter, useRoute } from 'vue-router'
 
 const title = ref(null)
 const content = ref(null)
+const image = ref(null)
 const store = useCounterStore()
 const router = useRouter()
 const route = useRoute()
@@ -57,7 +63,8 @@ onMounted(async () => {
   const boardId = route.params.id
   const response = await axios.get(`${store.API_URL}/boards/${boardId}/`, {
     headers: {
-      Authorization: `Token ${store.token}`
+      Authorization: `Token ${store.token}`,
+      'Content-Type': 'multipart/form-data'
     }
   });
   

@@ -30,7 +30,8 @@ class DepositProductsSerializer(serializers.ModelSerializer):
             tmp = []
             for item in options.filter(save_trm=6):
                 rate = item.intr_rate2
-                tmp.append(rate)
+                if rate:
+                    tmp.append(rate)
             return max(tmp)
         else:
             rate = options.get(save_trm=6).intr_rate2 if len(options.filter(save_trm=6)) > 0 else "-"
@@ -42,7 +43,8 @@ class DepositProductsSerializer(serializers.ModelSerializer):
             tmp = []
             for item in options.filter(save_trm=12):
                 rate = item.intr_rate2
-                tmp.append(rate)
+                if rate:
+                    tmp.append(rate)
             return max(tmp)
         else:
             rate = options.get(save_trm=12).intr_rate2 if len(options.filter(save_trm=12)) > 0 else "-"
@@ -54,7 +56,8 @@ class DepositProductsSerializer(serializers.ModelSerializer):
             tmp = []
             for item in options.filter(save_trm=24):
                 rate = item.intr_rate2
-                tmp.append(rate)
+                if rate:
+                    tmp.append(rate)
             return max(tmp)
         else:
             rate = options.get(save_trm=24).intr_rate2 if len(options.filter(save_trm=24)) > 0 else "-"
@@ -66,7 +69,8 @@ class DepositProductsSerializer(serializers.ModelSerializer):
             tmp = []
             for item in options.filter(save_trm=36):
                 rate = item.intr_rate2
-                tmp.append(rate)
+                if rate:
+                    tmp.append(rate)
             return max(tmp)
         else:
             rate = options.get(save_trm=36).intr_rate2 if len(options.filter(save_trm=36)) > 0 else "-"
@@ -93,7 +97,7 @@ class SavingProductsSerializer(serializers.ModelSerializer):
     
     def get_intr_rate_type_nm(self, obj):
         fin_prdt_cd = obj.fin_prdt_cd
-        print(fin_prdt_cd)
+        # print(fin_prdt_cd)
         intr_rate_type_nm = obj.saving_options.filter(fin_prdt_cd=fin_prdt_cd)[0].intr_rate_type_nm
         return intr_rate_type_nm
     def get_term_6(self, obj):
@@ -103,7 +107,9 @@ class SavingProductsSerializer(serializers.ModelSerializer):
             tmp = []
             for item in options.filter(save_trm=6):
                 rate = item.intr_rate2
-                tmp.append(rate)
+                if rate:
+                    tmp.append(rate)
+            print(tmp)
             return max(tmp)
         else:
             rate = options.get(save_trm=6).intr_rate2 if len(options.filter(save_trm=6)) > 0 else "-"
@@ -115,7 +121,8 @@ class SavingProductsSerializer(serializers.ModelSerializer):
             tmp = []
             for item in options.filter(save_trm=12):
                 rate = item.intr_rate2
-                tmp.append(rate)
+                if rate:
+                    tmp.append(rate)
             return max(tmp)
         else:
             rate = options.get(save_trm=12).intr_rate2 if len(options.filter(save_trm=12)) > 0 else "-"
@@ -127,7 +134,8 @@ class SavingProductsSerializer(serializers.ModelSerializer):
             tmp = []
             for item in options.filter(save_trm=24):
                 rate = item.intr_rate2
-                tmp.append(rate)
+                if rate:
+                    tmp.append(rate)
             return max(tmp)
         else:
             rate = options.get(save_trm=24).intr_rate2 if len(options.filter(save_trm=24)) > 0 else "-"
@@ -139,7 +147,8 @@ class SavingProductsSerializer(serializers.ModelSerializer):
             tmp = []
             for item in options.filter(save_trm=36):
                 rate = item.intr_rate2
-                tmp.append(rate)
+                if rate:
+                    tmp.append(rate)
             return max(tmp)
         else:
             rate = options.get(save_trm=36).intr_rate2 if len(options.filter(save_trm=36)) > 0 else "-"

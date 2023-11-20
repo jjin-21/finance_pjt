@@ -21,6 +21,7 @@ class CommentSerializer(serializers.ModelSerializer):
 
 
 class BoardSerializer(serializers.ModelSerializer):
+    image = serializers.ImageField(use_url=True, required=False, allow_null=True)
     comment_set = CommentSerializer(many=True, read_only=True)
     username = serializers.CharField(source='user.username', read_only=True)
     like_users = serializers.PrimaryKeyRelatedField(many=True, read_only=True)

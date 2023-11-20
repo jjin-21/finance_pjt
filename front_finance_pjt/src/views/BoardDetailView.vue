@@ -4,8 +4,8 @@
     <div v-if="board">
       <p>제목 : {{ board.title }}</p>
       <p>내용 : {{ board.content }}</p>
-      <span>이미지: </span>
       <div v-if="board.image">
+        <span>이미지: </span>
         <img :src="getImageUrl(board.image)" alt="">
       </div>
       <p>작성일 : {{ formatDateTime(board.created_at) }}</p>

@@ -29,11 +29,30 @@
     <v-btn :to="({name: 'UserProfileProductView', params: {id: store.userId}})">
       <h3>내가 담은 상품</h3>
     </v-btn>
-    
+    <br>
+    <br>
 
+    <hr>
+     <!-- 내가 쓴글 조회 -->
+     <h3>내가 쓴 글</h3>
+    <ul>
+      <li v-for="board in userBoards" :key="board.id">
+        {{ board.title }}
+        <!-- Add other post details as needed -->
+      </li>
+    </ul>
 
+    <hr>
+    <!-- 내가 쓴 댓글 조회 -->
+    <h3>내가 쓴 댓글</h3>
+    <ul>
+      <li v-for="comment in userComments" :key="comment.id">
+        {{ comment.content }}
+        <!-- Add other comment details as needed -->
+      </li>
+    </ul>
+    <hr>
   </div>
-  
 </template>
 
 <script setup>
@@ -45,7 +64,8 @@ import { useRouter } from 'vue-router'
 const store = useCounterStore()
 const router = useRouter()
 const profileData = ref([])
-
+const userBoards = ref([])
+const userComments = ref([])
 
 onMounted(() => {
   axios({
@@ -56,12 +76,15 @@ onMounted(() => {
       console.log(res)
       console.log(res.data)
       profileData.value = res.data
-      
     })
     .catch((err) => {
       console.log(err)
     })
+
+  
+  
 })
+
 
 const genderType = computed(() => {
   if (profileData.value && profileData.value.gender === 0) {

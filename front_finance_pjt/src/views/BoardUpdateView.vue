@@ -28,12 +28,12 @@
                   ></v-textarea>
                 </v-col>
               </v-row>
-              <!-- <v-row>
+              <v-row>
                 <v-col>
                   <input type="file" @change="onFileSelected">
                 </v-col>
               </v-row>
-              <v-row> -->
+              <v-row>
                 <v-col>
                   <v-btn type="submit" color="primary">수정 완료</v-btn>
                 </v-col>
@@ -59,6 +59,10 @@ const store = useCounterStore()
 const router = useRouter()
 const route = useRoute()
 
+const onFileSelected = event => {
+  image.value = event.target.files[0]
+}
+
 onMounted(async () => {
   const boardId = route.params.id
   const response = await axios.get(`${store.API_URL}/boards/${boardId}/`, {
@@ -70,20 +74,35 @@ onMounted(async () => {
   
   title.value = response.data.title;
   content.value = response.data.content;
+  if (image.value) {
+    const fileInput = $refs.fileInput;
+    fileInput.files = [new File([], image.value)]
+  }
   console.log(title.value)
   console.log(content.value)
+  console.log(image.value)
 })
 
 const updateBoard = function () {
+  const formData = new FormData() // FormData 인스턴스 생성
+  formData.append('title', title.value)
+  formData.append('content', content.value)
+  if (image.value) {
+    formData.append('image', image.value) // 이미지 파일 추가
+    console.log("IMAGE :", image)
+  }
+
   axios({
     method: 'put',
     url: `${store.API_URL}/boards/${route.params.id}/`,
-    data: {
-      title: title.value,
-      content: content.value
-    },
+    data: formData,
+    // {
+    //   title: title.value,
+    //   content: content.value
+    // },
     headers: {
-      Authorization: `Token ${store.token}`
+      Authorization: `Token ${store.token}`,
+      'Content-Type': 'multipart/form-data'
     }
   })
     .then((res) => {

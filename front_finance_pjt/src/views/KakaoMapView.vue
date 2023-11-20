@@ -29,7 +29,7 @@
                     ></v-select>
                 </v-col>
                 <v-col>
-                    <v-btn type="submit" color="teal darken-2" style="height:58px;">검색하기</v-btn>
+                    <v-btn type="submit" color="teal darken-2" style="height:58px;"><h3>검색하기</h3></v-btn>
                 </v-col>
                 </v-row>
 

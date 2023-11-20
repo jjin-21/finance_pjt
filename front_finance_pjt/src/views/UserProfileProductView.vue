@@ -14,10 +14,13 @@
       </v-row>
 
       <v-row>
-        <v-col v-if="store.showDeposit">
-          <h3>
-            예금 상품
-          </h3>
+        <v-col v-if="showDeposit">
+
+          <ProductChart 
+          :props="likedDepositList"
+          />
+
+          <h3>예금 상품 리스트</h3>
           <v-data-table
             :headers="headers"
             :items="likedDepositList"
@@ -36,13 +39,12 @@
             </template>
           </v-data-table>  
         </v-col>
-        <v-col v-if="store.showSaving">
-          <h3>
-            적금 상품
-          </h3>
-
-
-
+        <v-col v-if="showSaving">
+          
+          <ProductChart 
+          :props="likedSavingList"
+          />
+          <h3>적금 상품 리스트</h3>
           <v-data-table
             :headers="headers"
             :items="likedSavingList"
@@ -75,12 +77,15 @@ import { onMounted, ref, watch } from 'vue';
 import axios from 'axios'
 import { useCounterStore } from '@/stores/counter';
 import { useRouter } from 'vue-router'
+import ProductChart from '@/components/ProductChart.vue';
 
 const router = useRouter()
 
 const store = useCounterStore()
 const profileData = ref([])
 
+const showDeposit = ref(false)
+const showSaving = ref(false)
 
 
 const likedDepositList = ref([])
@@ -116,11 +121,13 @@ onMounted(() => {
 })
 
 const showDepositList = () => {
-  store.showDepositList()
+  showDeposit.value = true
+  showSaving.value = false
 };
 
 const showSavingList = () => {
-  store.showSavingList()
+  showSaving.value = true
+  showDeposit.value = false
 };
 
 const navigateToSavingDetails = (productId) => {

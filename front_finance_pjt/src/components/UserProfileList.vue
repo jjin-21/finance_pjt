@@ -33,11 +33,10 @@
     <br>
 
     <hr>
-     <!-- 내가 쓴글 조회 -->
-     <h3>내가 쓴 글</h3>
+    <h3>내가 쓴 글</h3>
     <ul>
-      <li v-for="board in userBoards" :key="board.id">
-        {{ board.title }}
+      <li v-for="post in userPosts" :key="post.id">
+        {{ post.title }}
         <!-- Add other post details as needed -->
       </li>
     </ul>
@@ -64,7 +63,7 @@ import { useRouter } from 'vue-router'
 const store = useCounterStore()
 const router = useRouter()
 const profileData = ref([])
-const userBoards = ref([])
+const userPosts = ref([])
 const userComments = ref([])
 
 onMounted(() => {
@@ -81,10 +80,34 @@ onMounted(() => {
       console.log(err)
     })
 
-  
-  
-})
+  // Fetch all posts
+  axios({
+    method: 'get',
+    url: `${store.API_URL}/boards/`
+  })
+    .then((res) => {
+      // Filter and reverse the posts authored by the user
+      // console.log(res)
+      userPosts.value = res.data.filter(post => post.user === store.userId).reverse()
+    })
+    .catch((err) => {
+      console.log(err)
+    })
 
+  // Fetch all comments
+  axios({
+    method: 'get',
+    url: `${store.API_URL}/boards/comments/`
+  })
+    .then((res) => {
+      // console.log(res)
+      // Filter and reverse the comments authored by the user
+      userComments.value = res.data.filter(comment => comment.user === store.userId).reverse()
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+})
 
 const genderType = computed(() => {
   if (profileData.value && profileData.value.gender === 0) {

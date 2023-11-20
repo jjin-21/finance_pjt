@@ -1,44 +1,57 @@
 <template>
-  <div>
-    <h1>Detail</h1>
-    <div v-if="board">
-      <p>제목 : {{ board.title }}</p>
-      <p>내용 : {{ board.content }}</p>
-      <div v-if="board.image">
-        <span>이미지: </span>
-        <img :src="getImageUrl(board.image)" alt="">
-      </div>
-      <p>작성일 : {{ formatDateTime(board.created_at) }}</p>
-      <p>수정일 : {{ formatDateTime(board.updated_at) }}</p>
-      <hr>
-      <p>
-        <span>
-          좋아요 수 : {{ likeCount }}
-        </span>
-        <span>
-          | |
-        </span>
-        <span>
-          <button @click.prevent="likeBoard">좋아요</button>
-        </span>
-      </p>
-      <hr>
-      <p>
-        <span @click.prevent="updateBoard" style="cursor: pointer">
-          [수정]
-        </span>
-        <span @click.prevent="deleteBoard" style="cursor: pointer">
-          [삭제]
-        </span>
-      </p>
-      <hr>
-      <CommentList 
-        :commentLst="commentLst"
-        :boardId="boardId"
-      />
-      <hr>
-    </div>
-  </div>
+  <v-container>
+    <v-row>
+      <v-col>
+        <v-card>
+          <v-card-text>
+            <div v-if="board">
+              <v-row>
+                <v-col>
+                  <v-row>
+                    <v-col>
+                      <v-divider></v-divider>
+                      <v-row>
+                        <v-col>
+                          <h2 class="headline">제목: {{ board.title }}</h2>
+                        </v-col>
+                      </v-row>
+                      <p class="caption">작성일: {{ formatDateTime(board.created_at) }}</p>
+                      <div v-if="board.image">
+                        <v-img :src="getImageUrl(board.image)" alt="" style="max-height: 300px;"></v-img>
+                      </div>
+                      <br>
+                      <p class="body-1 custom-body-1">{{ board.content }}</p>
+                      <v-divider></v-divider>
+                      <v-row>
+                        <v-col>
+                          <v-row align="center">
+                            <v-col>
+                              <span class="body-2">좋아요 수 : {{ likeCount }}</span>
+                              <v-btn @click.prevent="likeBoard" color="primary">좋아요</v-btn>
+                            </v-col>
+                          </v-row>
+                        </v-col>
+                      </v-row>
+                      <v-divider></v-divider>
+                      <v-row>
+                        <v-col>
+                          <v-btn @click.prevent="updateBoard" color="primary">수정</v-btn>
+                          <v-btn @click.prevent="deleteBoard" color="error">삭제</v-btn>
+                        </v-col>
+                      </v-row>
+                      <v-divider></v-divider>
+                      <CommentList :commentLst="commentLst" :boardId="boardId" />
+                      <v-divider></v-divider>
+                    </v-col>
+                  </v-row>
+                </v-col>
+              </v-row>
+            </div>
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script setup>
@@ -138,6 +151,9 @@ watch(board, (newBoard) => {
 
 </script>
 
-<style>
+<style scoped>
+.custom-body-1 {
+  font-size: 18px; /* Adjust the font size as needed */
+}
 
 </style>

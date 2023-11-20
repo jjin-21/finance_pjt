@@ -43,6 +43,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'accounts',
     'boards',
+    'consultings',
     'exchange_rates',
     'finances',
     'news',

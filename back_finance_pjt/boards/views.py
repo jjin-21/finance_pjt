@@ -15,7 +15,8 @@ def board_list(request):
         serializer = BoardSerializer(boards, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     elif request.method == 'POST':
-        serializer = BoardSerializer(data=request.data)
+        # serializer = BoardSerializer(data=request.data, files=request.FILES)
+        serializer = BoardSerializer(data=request.data, context={'request': request})
         if serializer.is_valid():
             board = serializer.save(user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)

@@ -4,6 +4,10 @@
     <div v-if="board">
       <p>제목 : {{ board.title }}</p>
       <p>내용 : {{ board.content }}</p>
+      <span>이미지: </span>
+      <div v-if="board.image">
+        <img :src="getImageUrl(board.image)" alt="">
+      </div>
       <p>작성일 : {{ board.created_at }}</p>
       <p>수정일 : {{ board.updated_at }}</p>
       <hr>
@@ -56,13 +60,17 @@ const boardId = ref(0)
 boardId.value = route.params.id
 // console.log(route.params.id)
 
+const getImageUrl = (imagePath) => {
+  return `http://localhost:8000${imagePath}`;
+}
+
 onMounted(() => {
   axios({
     method: 'get',
     url: `${store.API_URL}/boards/${route.params.id}/`
   })
     .then((res) => {
-      console.log(res.data)
+      console.log("onMount: ",res.data)
       board.value = res.data
       commentLst.value = res.data.comment_set
     })

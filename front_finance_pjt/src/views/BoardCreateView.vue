@@ -30,6 +30,12 @@
               </v-row>
               <v-row>
                 <v-col>
+                  <input type="file" @change="onFileSelected">
+                </v-col>
+              </v-row>
+
+              <v-row>
+                <v-col>
                   <v-btn type="submit" color="primary">작성 완료</v-btn>
                 </v-col>
               </v-row>
@@ -49,19 +55,35 @@ import { useRouter } from 'vue-router'
 
 const title = ref(null)
 const content = ref(null)
+const image = ref(null)
 const store = useCounterStore()
 const router = useRouter()
 
+const onFileSelected = event => {
+  image.value = event.target.files[0]
+}
+
+
 const createBoard = function () {
+  const formData = new FormData() // FormData 인스턴스 생성
+  formData.append('title', title.value)
+  formData.append('content', content.value)
+  if (image.value) {
+    formData.append('image', image.value) // 이미지 파일 추가
+    console.log("IMAGE :", image)
+  }
+
   axios({
     method: 'post',
     url: `${store.API_URL}/boards/`,
-    data: {
-      title: title.value,
-      content: content.value
-    },
+    data: formData,
+    // {
+    //   title: title.value,
+    //   content: content.value
+    // },
     headers: {
-      Authorization: `Token ${store.token}`
+      Authorization: `Token ${store.token}`,
+      'Content-Type': 'multipart/form-data'
     }
   })
     .then((res) => {

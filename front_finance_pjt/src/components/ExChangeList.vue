@@ -4,7 +4,7 @@
       <v-row>
         <v-col>
           <div class="header-container">
-            <h3>ExChangeList</h3>
+            <h3>환율정보</h3>
           </div>
         </v-col>
         <v-col class="text-right">

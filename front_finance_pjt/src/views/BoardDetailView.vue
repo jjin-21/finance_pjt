@@ -41,9 +41,21 @@
                   <!-- Action Buttons -->
                   <v-divider></v-divider>
                   <v-row>
+                    <v-col class="d-flex justify-start mb-1">
+                      <v-btn
+                        class="ma-2"
+                        color="orange-darken-2"
+                      >
+                        <v-icon
+                          start
+                          icon="mdi-arrow-left"
+                        ></v-icon>
+                        뒤로가기
+                      </v-btn>
+                    </v-col>
                     <v-col class="d-flex justify-end mb-1">
-                      <v-btn @click.prevent="updateBoard" color="primary">수정</v-btn>
-                      <v-btn @click.prevent="deleteBoard" color="error">삭제</v-btn>
+                      <v-btn class="my-2" @click.prevent="updateBoard" color="primary">수정</v-btn>
+                      <v-btn class="ma-2" @click.prevent="deleteBoard" color="error">삭제</v-btn>
                     </v-col>
                   </v-row>
                   <v-divider></v-divider>

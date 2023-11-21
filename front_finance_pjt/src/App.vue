@@ -2,13 +2,20 @@
   <v-app id="inspire">
     <v-app-bar flat>
       <v-container class="mx-auto d-flex align-center justify-center">
-        <router-link :to="{ name: 'HomeView' }">
-          <v-avatar
-            class="me-4"
-            color="grey-darken-1"
-            size="32"
-          ></v-avatar>
-        </router-link>
+        
+        <v-img
+          src="@/assets/finsight.png"
+          alt="Logo"
+          contain
+          class="me-4"
+          max-width="128"
+          max-height="128"
+          @click.prevent="goHome"
+          @mouseover="addHoverClass"
+          @mouseout="removeHoverClass"
+          style="cursor: pointer;"
+        ></v-img>
+              
 
         <v-btn
          :to="{name : 'BoardView'}"
@@ -121,6 +128,14 @@
   import { useTheme } from 'vuetify'
   import { useCounterStore } from './stores/counter';
   import { onMounted } from 'vue';
+  import { useRouter } from 'vue-router';
+
+  const router = useRouter()
+
+  const goHome = function () {
+    router.push({name: 'HomeView'})
+  }
+
 
   const links = [
         'Home',

@@ -27,14 +27,14 @@
         <!-- Profile Actions Section -->
         <v-row class="my-1">
           <v-col>
-            <v-btn :to="({ name: 'UserProfileProductView', params: { id: store.userId } })">
+            <v-btn variant="outlined" :to="({ name: 'UserProfileProductView', params: { id: store.userId } })">
               <h3>Products I Added</h3>
             </v-btn>
           </v-col>
           <v-col>
-            <v-btn class="mx-1" @click.prevent="editProfile"><h3>회원정보수정</h3></v-btn>
-            <v-btn class="mx-1" @click.prevent="deleteProfile"><h3>회원탈퇴</h3></v-btn>
-            <v-btn class="mx-1" @click.prevent="changePassword"><h3>비밀번호 변경</h3></v-btn>
+            <v-btn variant="outlined" class="mx-1" @click.prevent="editProfile"><h3>회원정보수정</h3></v-btn>
+            <v-btn variant="outlined" class="mx-1" @click.prevent="deleteProfile"><h3>회원탈퇴</h3></v-btn>
+            <v-btn variant="outlined" class="mx-1" @click.prevent="changePassword"><h3>비밀번호 변경</h3></v-btn>
           </v-col>
         </v-row>
         <hr>

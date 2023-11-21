@@ -1,5 +1,5 @@
 <template>
-  <div class="news-container">
+  <div :style="{ backgroundColor: getBackgroundColor()}" class="news-container">
     <a :href="sNews.link" target="_blank" class="news-link">
       <h2 class="news-title" v-html="sNews.title"></h2>
     </a>
@@ -9,9 +9,16 @@
 </template>
 
 <script setup>
+import { useCounterStore } from '@/stores/counter';
+
+const store = useCounterStore()
 const props = defineProps({
   sNews: Object,
 });
+
+const getBackgroundColor = () => {
+  return store.themeColor === 'dark' ? '#EEEEEE' : '#fff';
+};
 </script>
 
 <style scoped>

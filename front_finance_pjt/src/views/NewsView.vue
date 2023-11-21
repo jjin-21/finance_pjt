@@ -6,10 +6,10 @@
     <v-container>
       <v-row>
         <v-col>
-          <v-btn @click="showDepositList">예금 상품 뉴스</v-btn>
+          <v-btn variant="outlined" @click="showDepositList">예금 상품 뉴스</v-btn>
         </v-col>
         <v-col>
-          <v-btn @click="showSavingList">적금 상품 뉴스</v-btn>
+          <v-btn variant="outlined" @click="showSavingList">적금 상품 뉴스</v-btn>
         </v-col>
       </v-row>
 

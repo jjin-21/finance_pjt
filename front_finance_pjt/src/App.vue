@@ -2,15 +2,13 @@
   <v-app id="inspire">
     <v-app-bar flat>
       <v-container class="mx-auto d-flex align-center justify-center">
-        <v-avatar
-          class="me-4 "
-          color="grey-darken-1"
-          size="32"
-        ></v-avatar>
-
-        <v-btn
-         :to="{name : 'HomeView'}"
-        >Home</v-btn>
+        <router-link :to="{ name: 'HomeView' }">
+          <v-avatar
+            class="me-4"
+            color="grey-darken-1"
+            size="32"
+          ></v-avatar>
+        </router-link>
 
         <v-btn
          :to="{name : 'BoardView'}"
@@ -35,7 +33,7 @@
 
         <v-spacer></v-spacer>
 
-        <v-btn @click="toggleTheme">toggle theme</v-btn>
+        <v-btn @click="toggleTheme">{{ store.themeColor }} Mode</v-btn>
 
         <v-btn
           v-show="store.isLogin"
@@ -72,7 +70,7 @@
       </v-container>
     </v-app-bar>
 
-    <v-main class="bg-grey-lighten-3" >
+    <v-main >
       <v-container fluid class="pa-0">
         <v-row no-gutters>
           <v-col cols="2">
@@ -82,7 +80,7 @@
             </v-sheet>
           </v-col>
 
-          <v-col cols="8">
+          <v-col  cols="8">
             <v-sheet min-height="150vh" rounded="0">
               <router-view />
             </v-sheet>

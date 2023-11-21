@@ -5,45 +5,52 @@
         <v-card>
           <v-card-text>
             <div v-if="board">
+              <!-- Board Details -->
               <v-row>
                 <v-col>
+                  <v-divider></v-divider>
                   <v-row>
                     <v-col>
-                      <v-divider></v-divider>
-                      <v-row>
-                        <v-col>
-                          <h2 class="headline">제목: {{ board.title }}</h2>
-                        </v-col>
-                      </v-row>
-                      <p class="caption">작성일: {{ formatDateTime(board.created_at) }}</p>
-                      <div v-if="board.image">
-                        <v-img :src="getImageUrl(board.image)" alt="" style="max-height: 300px;"></v-img>
-                      </div>
-                      <br>
-                      <p class="body-1 custom-body-1">{{ board.content }}</p>
-                      <v-divider></v-divider>
-                      <v-row>
-                        <v-col>
-                          <v-row align="center">
-                            <v-col>
-                              <span class="body-2">좋아요 수 : {{ likeCount }}</span>
-                              <v-btn @click.prevent="likeBoard" color="primary">좋아요</v-btn>
-                            </v-col>
-                          </v-row>
-                        </v-col>
-                      </v-row>
-                      <v-divider></v-divider>
-                      <v-row>
-                        <v-col>
-                          <v-btn @click.prevent="updateBoard" color="primary">수정</v-btn>
-                          <v-btn @click.prevent="deleteBoard" color="error">삭제</v-btn>
-                        </v-col>
-                      </v-row>
-                      <v-divider></v-divider>
-                      <CommentList :commentLst="commentLst" :boardId="boardId" />
-                      <v-divider></v-divider>
+                      <h2 class="headline">제목: {{ board.title }}</h2>
                     </v-col>
                   </v-row>
+                  <p class="caption">작성자: {{ board.username }} 작성일: {{ formatDateTime(board.created_at) }}</p>
+                  <div v-if="board.image">
+                    <v-img :src="getImageUrl(board.image)" alt="" style="max-height: 300px;"></v-img>
+                  </div>
+                  <br>
+                  <p class="body-1 custom-body-1">{{ board.content }}</p>
+                  <br>
+                  <v-divider></v-divider>
+                  
+                  <!-- Like Section -->
+                  <v-row align="center" justify="center" class="mb-2 mt-2">
+                    <v-col class="text-center">
+                      <v-btn @click.prevent="likeBoard" color="primary" icon class="ml-2">
+                        <v-icon>mdi-thumb-up-outline</v-icon>
+                      </v-btn>
+                      
+                      <span class="body-1 ml-2">추천수 : {{ likeCount }}</span>
+                      <!-- Add margin to the button -->
+                      <v-btn @click.prevent="likeBoard" color="error" icon class="ml-2">
+                        <v-icon>mdi-thumb-down-outline</v-icon>
+                      </v-btn>
+                    </v-col>
+                  </v-row>
+
+                  <!-- Action Buttons -->
+                  <v-divider></v-divider>
+                  <v-row>
+                    <v-col class="d-flex justify-end mb-1">
+                      <v-btn @click.prevent="updateBoard" color="primary">수정</v-btn>
+                      <v-btn @click.prevent="deleteBoard" color="error">삭제</v-btn>
+                    </v-col>
+                  </v-row>
+                  <v-divider></v-divider>
+
+                  <!-- Comment Section -->
+                  <CommentList :commentLst="commentLst" :boardId="boardId" />
+                  <v-divider></v-divider>
                 </v-col>
               </v-row>
             </div>
@@ -156,4 +163,9 @@ watch(board, (newBoard) => {
   font-size: 18px; /* Adjust the font size as needed */
 }
 
+.ml-2 {
+  font-size: 16px;
+  margin-left: 8px;
+  font-weight: 600;
+}
 </style>

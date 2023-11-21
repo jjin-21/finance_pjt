@@ -1,109 +1,107 @@
 <template>
-  <div>
-    <hr>
-    <p v-if="!isUpdating">
-      <div>
-        작성자: {{ comment.username }}
-      </div>
-      <div>
-        {{ commentContent }}
-      </div>      
-    </p>
-    <p v-if="isUpdating">
-      <form @submit.prevent="updateComment">
-        <input type="text" style="width: 300px;" v-model="commentContent">
-        <p>
-          <button type="submit">댓글 수정</button>
-        </p>
-      </form>
-    </p>
-    <p v-if="!isUpdating">
-      <span>
-        작성시간 : {{ comment.created_at }}
-      </span>
-      <span @click.prevent="updateState" style="cursor: pointer">
-        [수정]
-      </span>
-      <span @click.prevent="deleteComment"  style="cursor: pointer">
-        [삭제]
-      </span>
-      </p>
-  </div>
+  <v-divider class="my-4"></v-divider>
+  <v-row align="end">
+    <v-col>
+      <v-card>
+        <v-card-text>
+          <v-row>
+            <v-col v-if="!isUpdating" class="d-flex justify-space-between align-center">
+              <div>
+                작성자: {{ comment.username }} 작성시간: {{ formatDateTime(comment.created_at) }}
+              </div>
+            </v-col>
+            <v-col v-if="isUpdating">
+              <form @submit.prevent="updateComment">
+                <v-text-field
+                  v-model="commentContent"
+                  label="댓글을 수정하세요"
+                ></v-text-field>
+                <v-btn type="submit">댓글 수정</v-btn>
+              </form>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col v-if="!isUpdating" class="d-flex justify-space-between align-center">
+              <p>{{ comment.content }}</p>
+              <v-col class="d-flex justify-end align-center">
+                <v-btn @click.prevent="updateState">
+                  수정
+                </v-btn>
+                <v-btn class="m-0" @click.prevent="deleteComment">
+                  삭제
+                </v-btn>
+              </v-col>
+            </v-col>
+          </v-row>
+        </v-card-text>
+      </v-card>
+    </v-col>
+  </v-row>
 </template>
+
+
 
 <script setup>
 import axios from 'axios';
-import { ref } from 'vue'
-import { useCounterStore } from '@/stores/counter'
-import { useRouter } from 'vue-router'
+import { ref } from 'vue';
+import { useCounterStore } from '@/stores/counter';
+import { useRouter } from 'vue-router';
 
 const props = defineProps({
-  comment: Object
-})
+  comment: Object,
+});
 
-// console.log(props.comment.board.id)
+const store = useCounterStore();
+const router = useRouter();
+const isUpdating = ref(false);
+const commentContent = ref(props.comment.content);
 
+const formatDateTime = (dateTimeString) => {
+  const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+  return new Date(dateTimeString).toLocaleString('en-US', options).replace(/(\d+)\/(\d+)\/(\d+), (\d+:\d+:\d+)/, '$3-$1-$2 $4');
+};
 
-const store = useCounterStore()
-const router = useRouter()
-const isUpdating = ref(false)
-const commentContent = ref(props.comment.content)
-
-
-
-// 댓글 수정 창 변경
 const updateState = function () {
-  isUpdating.value = true
-}
+  isUpdating.value = true;
+};
 
-
-
-// 댓글 수정 제출
 const updateComment = function () {
   axios({
     method: 'put',
     url: `${store.API_URL}/boards/comment/${props.comment.id}/`,
     data: {
-      content: commentContent.value
-    }
+      content: commentContent.value,
+    },
   })
     .then((res) => {
-      // console.log(res)
-      commentContent.value = res.data.content
-      isUpdating.value = false
-      router.push({name: 'DetailView', params:{id: props.comment.board.id}})
-      // console.log(4)
+      commentContent.value = res.data.content;
+      isUpdating.value = false;
+      router.push({ name: 'DetailView', params: { id: props.comment.board.id } });
     })
     .catch((err) => {
-      console.log(err)
-    })
-}
+      console.log(err);
+    });
+};
 
-
-
-// 댓글 삭제
 const deleteComment = function () {
-  const userConfirmed = window.confirm('삭제하시겠습니까?')
+  const userConfirmed = window.confirm('삭제하시겠습니까?');
 
   if (userConfirmed) {
     axios({
       method: 'delete',
-      url: `${store.API_URL}/boards/comment/${props.comment.id}/`
+      url: `${store.API_URL}/boards/comment/${props.comment.id}/`,
     })
       .then((res) => {
-        console.log(res)
-        router.go(0)
+        console.log(res);
+        router.go(0);
       })
       .catch((err) => {
-        console.log(err)
-      })
+        console.log(err);
+      });
   }
-}
-
-
-
+};
 </script>
 
 <style scoped>
-
+/* Add custom styling if needed */
 </style>

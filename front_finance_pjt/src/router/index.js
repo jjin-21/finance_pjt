@@ -53,7 +53,7 @@ const router = createRouter({
       component: LogOutView
     },
     {
-      path: '/home',
+      path: '/',
       name: 'HomeView',
       component: HomeView
     },

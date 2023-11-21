@@ -13,7 +13,13 @@ class CustomRegisterSerializer(RegisterSerializer):
         (0, '남자'),
         (1, '여자'),
     ]
+    FIN_CHOICES = [
+        (0, '금융 비관련 업종'),
+        (1, '금융 관련 업종'),
+    ]
     email = serializers.EmailField(required=True)
+    company = serializers.CharField(max_length=20, default="무직")
+    is_fin_job = serializers.ChoiceField(choices=FIN_CHOICES, required=True)
     phone_num = serializers.CharField(required=True)
     nickname = serializers.CharField(required=True)
     age = serializers.IntegerField(required=True)

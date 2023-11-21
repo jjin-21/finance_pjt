@@ -8,11 +8,9 @@
           alt="Logo"
           contain
           class="me-4"
-          max-width="128"
-          max-height="128"
+          max-width="80"
+          max-height="80"
           @click.prevent="goHome"
-          @mouseover="addHoverClass"
-          @mouseout="removeHoverClass"
           style="cursor: pointer;"
         ></v-img>
               

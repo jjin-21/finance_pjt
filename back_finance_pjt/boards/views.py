@@ -39,7 +39,7 @@ def board_detail(request, board_pk):
 
     elif request.method == 'DELETE':
         board.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response({"message": "삭제되었습니다."},status=status.HTTP_204_NO_CONTENT)
 
     elif request.method == 'PUT':
         serializer = BoardSerializer(board, data=request.data, context={'request': request}, partial=True)
@@ -86,7 +86,7 @@ def comment_detail(request, comment_pk):
     
     elif request.method == 'DELETE':
         comment.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response({"message": "삭제되었습니다."}, status=status.HTTP_204_NO_CONTENT)
         
     elif request.method == 'PUT':
         serializer = CommentSerializer(comment, data=request.data)

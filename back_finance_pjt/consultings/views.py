@@ -49,3 +49,29 @@ def answer_create(request, consulting_pk):
     if serializer.is_valid(raise_exception=True):
         serializer.save(consulting=consulting, user=request.user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+    
+
+@api_view(['GET'])
+def answer_list(request):
+    answers = Answer.objects.all()
+    serializer = AnswerSerializer(answers, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['GET', 'DELETE', 'PUT'])
+# comment_detail 인자 board_pk 뻈음
+def answer_detail(request, answer_pk):
+    answer = Answer.objects.get(pk=answer_pk)
+    if request.method == 'GET':
+        serializer = AnswerSerializer(answer)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    elif request.method == 'DELETE':
+        answer.delete()
+        return Response({"message": "삭제되었습니다."}, status=status.HTTP_204_NO_CONTENT)
+        
+    elif request.method == 'PUT':
+        serializer = AnswerSerializer(answer, data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_202_ACCEPTED)

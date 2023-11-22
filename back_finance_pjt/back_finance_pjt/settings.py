@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'exchange_rates',
     'finances',
     'news',
+    'recommends',
     'rest_framework',
     'rest_framework.authtoken',
     'dj_rest_auth',

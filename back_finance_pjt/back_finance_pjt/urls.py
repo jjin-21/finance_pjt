@@ -30,4 +30,5 @@ urlpatterns = [
     path('finances/', include('finances.urls')),
     path('exchange-rates/', include('exchange_rates.urls')),
     path('news/', include('news.urls')),
+    path('recommends/', include('recommends.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

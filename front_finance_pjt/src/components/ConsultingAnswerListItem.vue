@@ -68,7 +68,7 @@ const updateState = function () {
 const updateComment = function () {
   axios({
     method: 'put',
-    url: `${store.API_URL}/boards/comment/${props.comment.id}/`,
+    url: `${store.API_URL}/consultings/answer/${props.comment.id}/`,
     data: {
       content: commentContent.value,
     },
@@ -76,7 +76,7 @@ const updateComment = function () {
     .then((res) => {
       commentContent.value = res.data.content;
       isUpdating.value = false;
-      // router.push({ name: 'DetailView', params: { id: props.comment.board.id } });
+      // router.push({ name: 'ConsultingBoardDetailView', params: { id: props.comment.board.id } });
       router.go(0)
     })
     .catch((err) => {
@@ -90,7 +90,7 @@ const deleteComment = function () {
   if (userConfirmed) {
     axios({
       method: 'delete',
-      url: `${store.API_URL}/boards/comment/${props.comment.id}/`,
+      url: `${store.API_URL}/consultings/answer/${props.comment.id}/`,
     })
       .then((res) => {
         console.log(res);

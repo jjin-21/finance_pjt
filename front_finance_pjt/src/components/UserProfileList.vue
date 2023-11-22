@@ -1,40 +1,49 @@
 <template>
   <v-container>
     <v-row>
-      <v-col>
-        <h3>User Profile View!</h3>
+      <v-col >
+        <v-btn variant="outlined" class=" my-3" @click.prevent="showMyProfile"><h3>내 프로필 보기</h3></v-btn>
+
         
         <!-- Profile Data Section -->
-        <v-row>
-          <v-col>
-            <v-list>
-              <v-list-item>
-                <v-list-item-content>
-                  <v-list-item-title>Username: {{ profileData.username }}</v-list-item-title>
-                  <v-list-item-title>Nickname: {{ profileData.nickname }}</v-list-item-title>
-                  <v-list-item-title>Email: {{ profileData.email }}</v-list-item-title>
-                  <v-list-item-title>PhoneNumber: {{ profileData.phone_num }}</v-list-item-title>
-                  <v-list-item-title>Gender: {{ genderType }}</v-list-item-title>
-                  <v-list-item-title>Asset: {{ profileData.asset }}</v-list-item-title>
-                  <v-list-item-title>Salary: {{ profileData.salary }}</v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-            </v-list>
-          </v-col>
-        </v-row>
+        <v-dialog v-model="showUserProfileDialog" max-width="600">
+          <v-card>
+            <v-card-title>User Profile</v-card-title>
+            <v-card-text>
+              <!-- Display user profile data here -->
+              <v-list>
+                <v-list-item>
+                  <v-list-item-content>
+                    <v-list-item-title>Username: {{ profileData.username }}</v-list-item-title>
+                    <v-list-item-title>Nickname: {{ profileData.nickname }}</v-list-item-title>
+                    <v-list-item-title>Email: {{ profileData.email }}</v-list-item-title>
+                    <v-list-item-title>PhoneNumber: {{ profileData.phone_num }}</v-list-item-title>
+                    <v-list-item-title>Gender: {{ genderType }}</v-list-item-title>
+                    <v-list-item-title>Company: {{ profileData.company }}</v-list-item-title>
+                    <v-list-item-title>Asset: {{ profileData.asset }}</v-list-item-title>
+                    <v-list-item-title>Salary: {{ profileData.salary }}</v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list>
+            </v-card-text>
+            <v-card-actions>
+              <v-btn @click="showUserProfileDialog = false">Close</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
         <hr>
 
         <!-- Profile Actions Section -->
         <v-row class="my-1">
           <v-col>
             <v-btn variant="outlined" :to="({ name: 'UserProfileProductView', params: { id: store.userId } })">
-              <h3>Products I Added</h3>
+              <h3>내가 담은 상품</h3>
             </v-btn>
           </v-col>
           <v-col>
+            <v-btn variant="outlined" class="mx-1" @click.prevent="changePassword"><h3>비밀번호 변경</h3></v-btn>
             <v-btn variant="outlined" class="mx-1" @click.prevent="editProfile"><h3>회원정보수정</h3></v-btn>
             <v-btn variant="outlined" class="mx-1" @click.prevent="deleteProfile"><h3>회원탈퇴</h3></v-btn>
-            <v-btn variant="outlined" class="mx-1" @click.prevent="changePassword"><h3>비밀번호 변경</h3></v-btn>
           </v-col>
         </v-row>
         <hr>
@@ -108,6 +117,8 @@ const userPostsPage = ref(1);
 const userCommentsPage = ref(1);
 const pageSize = 5;
 
+const showUserProfileDialog = ref(false);
+
 onMounted(() => {
   // Fetch user profile data
   axios({
@@ -157,6 +168,8 @@ const genderType = computed(() => {
   }
 })
 
+// const 
+
 const editProfile = function () {
   router.push({
     name: 'UserProfileEditView',
@@ -182,6 +195,10 @@ const changePassword = function () {
       id: store.userId
     }
   })
+}
+
+const showMyProfile = function () {
+  showUserProfileDialog.value = true
 }
 
 

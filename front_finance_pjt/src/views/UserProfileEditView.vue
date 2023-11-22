@@ -2,35 +2,36 @@
   <v-card
     class="mx-auto"
     max-width="700"
-    title="User Profile Edit"
+    title="회원정보수정"
   >
     <v-container>
       <v-text-field
         v-model="username"
         color="primary"
-        label="Username"
+        label="아이디"
         variant="underlined"
       ></v-text-field>
 
       <v-text-field
       v-model="email"
       color="primary"
-      label="Email"
-      placeholder="Enter your email"
+      label="이메일"
+      placeholder="이메일을 입력해 주세요"
       variant="underlined"
       ></v-text-field>
 
       <v-text-field
         v-model="phonenum"
         color="primary"
-        label="PhoneNumber"
+        label="전화번호"
+        placeholder="전화번호를 입력해 주세요"
         variant="underlined"
       ></v-text-field>
         
       <v-text-field
         v-model="nickname"
         color="primary"
-        label="Nickname"
+        label="별명"
         variant="underlined"
       ></v-text-field>
       
@@ -38,15 +39,32 @@
         v-model="genderSelected"
         :items="genderOptions"
         color="primary"
-        label="Gender"
+        label="성별"
         placeholder="Select Gender"
+        variant="underlined"
+      ></v-select>
+
+      <v-text-field
+        v-model="company"
+        color="primary"
+        label="회사"
+        placeholder="회사명을 입력해주세요"
+        variant="underlined"
+      ></v-text-field>
+
+      <v-select
+        v-model="finSelected"
+        :items="finOptions"
+        color="primary"
+        label="금융업 종사자 여부"
+        placeholder="선택해주세요"
         variant="underlined"
       ></v-select>
 
       <v-text-field
         v-model="age"
         color="primary"
-        label="Age"
+        label="나이"
         placeholder="숫자만 입력해주세요"
         variant="underlined"
         type="number"
@@ -56,7 +74,7 @@
       <v-text-field
       v-model="asset"
       color="primary"
-      label="Asset"
+      label="자산"
       placeholder="숫자만 입력해주세요"
       variant="underlined"
       type="number"
@@ -65,7 +83,7 @@
       <v-text-field
       v-model="salary"
       color="primary"
-      label="Salary"
+      label="월급"
       placeholder="숫자만 입력해주세요"
       variant="underlined"
       type="number"
@@ -105,13 +123,19 @@ const asset = ref(null)
 const salary = ref(null)
 const email = ref(null)
 const phonenum = ref(null)
+const company = ref(null)
+const is_fin_job = ref(null)
 
 const genderSelected = ref(null)
+const finSelected = ref(null)
 
 const genderOptions = ref([
   'Male', 'Female'
 ])
 
+const finOptions = ref([
+ '금융업 비종사자', '금융업 종사자'
+])
 
 
 onMounted(() => {
@@ -130,6 +154,8 @@ onMounted(() => {
       age.value = res.data.age
       asset.value = res.data.asset
       salary.value = res.data.salary
+      company.value = res.data.company
+      finSelected.value = res.data.is_fin_job === 0 ? '금융업 비종사자' : '금융업 종사자'
       genderSelected.value = res.data.gender === 0 ? 'Male' : 'Female'
       
     })
@@ -149,7 +175,9 @@ const editProfile = function () {
     asset: asset.value,
     salary: salary.value,
     email: email.value,
-    phone_num: phonenum.value
+    phone_num: phonenum.value,
+    company: company.value,
+    is_fin_job: is_fin_job.value
   }
   console.log(payload.username)
   
@@ -163,6 +191,11 @@ const editProfile = function () {
 watch(genderSelected, (newGenderSelected) => {
   gender.value = newGenderSelected === 'Male' ? 0 : 1;
 })
+
+watch(finSelected, (newFinSelected) => {
+  is_fin_job.value = newFinSelected === '금융업 비종사자' ? 0 : 1;
+})
+
 
 
 </script>

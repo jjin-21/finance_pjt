@@ -1,14 +1,14 @@
 <template>
   <v-container>
     <h1 class="text-h2 mb-4">Free Board</h1>
-    <v-row class="mb-4" >
+    <v-row class="mb-4">
       <v-col>
-        <RouterLink :to="{ name: 'CreateView' }">
-          <v-btn color="primary"><h3>글 작성</h3></v-btn>
+        <RouterLink :to="{ name: 'AnonymousBoardCreateView' }">
+          <v-btn color="primary">CREATE</v-btn>
         </RouterLink>
       </v-col>
     </v-row>
-    <BoardList />
+    <AnonymousBoardList />
   </v-container>
 </template>
 
@@ -17,11 +17,12 @@ import { onMounted } from 'vue'
 import { useCounterStore } from '@/stores/counter'
 import { RouterLink } from 'vue-router'
 import BoardList from '@/components/BoardList.vue'
+import AnonymousBoardList from '@/components/AnonymousBoardList.vue';
 
 const store = useCounterStore()
 
 onMounted(() => {
-  store.getBoards()
+  store.getAnonymousBoards()
 })
 </script>
 

@@ -18,6 +18,14 @@ import ProductDepositView from '@/views/ProductDepositView.vue'
 import ProductSavingView from '@/views/ProductSavingView.vue'
 import UserProfileChangePasswordView from '@/views/UserProfileChangePasswordView.vue'
 import UserProfileProductView from '@/views/UserProfileProductView.vue'
+import ConsultingBoardView from '@/views/ConsultingBoardView.vue'
+import ConsultingBoardCreateView from '@/views/ConsultingBoardCreateView.vue'
+import ConsultingBoardDetailView from '@/views/ConsultingBoardDetailView.vue'
+import ConsultingBoardUpdateView from '@/views/ConsultingBoardUpdateView.vue'
+import AnonymousBoardView from '@/views/AnonymousBoardView.vue'
+import AnonymousBoardCreateView from '@/views/AnonymousBoardCreateView.vue'
+import AnonymousBoardDetailView from '@/views/AnonymousBoardDetailView.vue'
+import AnonymousBoardUpdateView from '@/views/AnonymousBoardUpdateView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -116,7 +124,48 @@ const router = createRouter({
       path: '/product/saving/:id/',
       name: 'ProductSavingView',
       component: ProductSavingView
-    }
+    },
+    {
+      path: '/consultings/',
+      name: 'ConsultingBoardView',
+      component: ConsultingBoardView
+    },
+    {
+      path: '/consultings/:id',
+      name: 'ConsultingBoardDetailView',
+      component: ConsultingBoardDetailView
+    },
+    {
+      path: '/consultings/:id/update',
+      name: 'ConsultingBoardUpdateView',
+      component: ConsultingBoardUpdateView
+    },
+    {
+      path: '/consultings/create',
+      name: 'ConsultingBoardCreateView',
+      component: ConsultingBoardCreateView
+    },
+    {
+      path: '/anonymous',
+      name: 'AnonymousBoardView',
+      component: AnonymousBoardView
+    },
+    {
+      path: '/anonymous/:id',
+      name: 'AnonymousBoardDetailView',
+      component: AnonymousBoardDetailView
+    },
+    {
+      path: '/anonymous/:id/update',
+      name: 'AnonymousBoardUpdateView',
+      component: AnonymousBoardUpdateView
+    },
+    {
+      path: '/anonymous/create',
+      name: 'AnonymousBoardCreateView',
+      component: AnonymousBoardCreateView
+    },
+
   ]
 })
 

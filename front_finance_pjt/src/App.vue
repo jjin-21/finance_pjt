@@ -15,25 +15,58 @@
         ></v-img>
               
 
-        <v-btn
-         :to="{name : 'BoardView'}"
-        >Board</v-btn>
+        <v-btn @click="toggleDropdown1">Board</v-btn>
 
-        <v-btn
-          :to="{name: 'KaKaoMapView'}"
-        >Map</v-btn>
+        <v-dialog v-model="dropdown1" max-width="500">
+          <v-card>
+            <v-list>
+              <v-list-item @click="navigateTo('BoardView')">
+                <v-list-item-title>Board</v-list-item-title>
+              </v-list-item>
+              <v-list-item @click="navigateTo('AnonymousBoardView')">
+                <v-list-item-title>Anonymous</v-list-item-title>
+              </v-list-item>
+              <v-list-item @click="navigateTo('ConsultingBoardView')">
+                <v-list-item-title>QnA</v-list-item-title>
+              </v-list-item>
+              <!-- Add more items as needed -->
+            </v-list>
+          </v-card>
+        </v-dialog>
 
-        <v-btn
-          :to="{name: 'ExChangeView'}"
-        >ExChange</v-btn>
+
+        <v-btn @click="toggleDropdown2">UTILITY</v-btn>
+
+        <v-dialog v-model="dropdown2" max-width="500">
+          <v-card>
+            <v-list>
+              <v-list-item @click="navigateTo('KaKaoMapView')">
+                <v-list-item-title>Map</v-list-item-title>
+              </v-list-item>
+              <v-list-item @click="navigateTo('ExChangeView')">
+                <v-list-item-title>ExChange</v-list-item-title>
+              </v-list-item>
+              <!-- Add more items as needed -->
+            </v-list>
+          </v-card>
+        </v-dialog>
         
-        <v-btn
-          :to="{name: 'ProductView'}"
-        >Product</v-btn>
-
-        <v-btn
-          :to="{name: 'NewsView'}"
-        >News</v-btn>
+        <v-btn @click="toggleDropdown3">PRODUCT</v-btn>
+        
+        <v-dialog v-model="dropdown3" max-width="500">
+          <v-card>
+            <v-list>
+              <v-list-item @click="navigateTo('ProductView')">
+                <v-list-item-title>Finance Product</v-list-item-title>
+              </v-list-item>
+              <v-list-item @click="navigateTo('NewsView')">
+                <v-list-item-title>Finance News</v-list-item-title>
+              </v-list-item>
+              <!-- Add more items as needed -->
+            </v-list>
+          </v-card>
+        </v-dialog>
+        
         
 
         <v-spacer></v-spacer>
@@ -125,14 +158,34 @@
 <script setup>
   import { useTheme } from 'vuetify'
   import { useCounterStore } from './stores/counter';
-  import { onMounted } from 'vue';
+  import { onMounted, ref } from 'vue';
   import { useRouter } from 'vue-router';
 
   const router = useRouter()
+  const dropdown1 = ref(false);
+  const dropdown2 = ref(false);
+  const dropdown3 = ref(false);
 
   const goHome = function () {
     router.push({name: 'HomeView'})
   }
+
+  const navigateTo = function (routeName) {
+    router.push({ name: routeName });
+    dropdown1.value = false
+    dropdown2.value = false
+    dropdown3.value = false
+  };
+
+  const toggleDropdown1 = function () {
+    dropdown1.value = !dropdown1.value;
+  };
+  const toggleDropdown2 = function () {
+    dropdown2.value = !dropdown2.value;
+  };
+  const toggleDropdown3 = function () {
+    dropdown3.value = !dropdown3.value;
+  };
 
 
   const links = [

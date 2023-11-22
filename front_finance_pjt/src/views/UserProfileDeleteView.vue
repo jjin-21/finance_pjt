@@ -33,8 +33,7 @@ onMounted(() => {
                 console.log(err);
             });
       } else {
-          // 사용자가 "아니오"를 선택한 경우 또는 창을 닫은 경우
-          // 추가적인 처리가 필요한 경우 여기에 코드를 추가
+         window.history.back()
         }
 })
   

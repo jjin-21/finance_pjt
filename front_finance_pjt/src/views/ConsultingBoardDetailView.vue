@@ -25,19 +25,7 @@
                   <v-divider></v-divider>
                   
                   <!-- Like Section -->
-                  <v-row align="center" justify="center" class="mb-2 mt-2">
-                    <v-col class="text-center">
-                      <v-btn @click.prevent="likeBoard" color="primary" icon class="ml-2">
-                        <v-icon>mdi-thumb-up-outline</v-icon>
-                      </v-btn>
-                      
-                      <span class="body-1 ml-2">추천수 : {{ likeCount }}</span>
-                      <!-- Add margin to the button -->
-                      <v-btn @click.prevent="dislikeBoard" color="error" icon class="ml-2">
-                        <v-icon>mdi-thumb-down-outline</v-icon>
-                      </v-btn>
-                    </v-col>
-                  </v-row>
+                  
 
                   <!-- Action Buttons -->
                   <v-divider></v-divider>
@@ -63,7 +51,7 @@
                   <v-divider></v-divider>
 
                   <!-- Comment Section -->
-                  <CommentList :commentLst="commentLst" :boardId="boardId" />
+                  <ConsultingAnswerList :commentLst="commentLst" :boardId="boardId" />
                   <v-divider></v-divider>
                 </v-col>
               </v-row>
@@ -81,6 +69,7 @@ import { onMounted, ref, watch } from 'vue'
 import { useCounterStore } from '@/stores/counter'
 import { useRoute, useRouter } from 'vue-router'
 import CommentList from '@/components/CommentList.vue'
+import ConsultingAnswerList from '@/components/ConsultingAnswerList.vue'
 
 const store = useCounterStore()
 const route = useRoute()
@@ -90,7 +79,6 @@ const comment = ref(null)
 const commentLst = ref([])
 const likeCount = ref(0)
 const boardId = ref(0)
-const likedState = ref(null)
 
 boardId.value = route.params.id
 // console.log(route.params.id)
@@ -107,13 +95,12 @@ const formatDateTime = (dateTimeString) => {
 onMounted(() => {
   axios({
     method: 'get',
-    url: `${store.API_URL}/boards/${route.params.id}/`
+    url: `${store.API_URL}/consultings/${route.params.id}/`
   })
     .then((res) => {
       console.log(res.data)
       board.value = res.data
-      commentLst.value = res.data.comment_set
-      likedState.value = res.data.like_users.includes(store.userId)
+      commentLst.value = res.data.answer_set
     })
     .catch((err) => {
       console.log(err)
@@ -127,7 +114,7 @@ onMounted(() => {
 
 const updateBoard = function () {
   router.push({
-    name: 'UpdateView',
+    name: 'ConsultingBoardUpdateView',
     params: { 
       id: route.params.id
     }
@@ -137,11 +124,11 @@ const updateBoard = function () {
 const deleteBoard = function () {
   axios({
     method: 'delete',
-    url: `${store.API_URL}/boards/${route.params.id}/`
+    url: `${store.API_URL}/consultings/${route.params.id}/`
   })
     .then((res) => {
       console.log(res)
-      router.push({name : 'BoardView'})
+      router.push({name : 'ConsultingBoardView'})
       
     })
     .catch((err) => {
@@ -150,11 +137,10 @@ const deleteBoard = function () {
 }
 
 const goBack = function () {
-  router.push({name: 'BoardView'})
+  router.push({name: 'ConsultingBoardView'})
 }
 
 const likeBoard = function () {
-  if (!likedState.value) {
   axios({
     method: 'post',
     url: `${store.API_URL}/boards/${Number(route.params.id)}/likes/`,
@@ -165,42 +151,12 @@ const likeBoard = function () {
     .then((res) => {
       console.log(res)
       likeCount.value = res.data.like_users.length;
-      likedState.value = true
-      console.log(likedState.value)
     })
     .catch((err) => {
       console.log(err)
       
     })
-  }
 }
-
-const dislikeBoard = function () {
-  if (likedState.value) {
-  axios({
-    method: 'post',
-    url: `${store.API_URL}/boards/${Number(route.params.id)}/likes/`,
-    headers: {
-      Authorization: `Token ${store.token}`
-    }
-  })
-    .then((res) => {
-      console.log(res)
-      likeCount.value = res.data.like_users.length;
-      likedState.value = false
-      console.log(likedState.value)
-
-    })
-    .catch((err) => {
-      console.log(err)
-      
-    })
-  }
-}
-
-watch(board, (newBoard) => {
-  likeCount.value = newBoard.like_users.length;
-})
 
 
 

@@ -6,6 +6,8 @@ import axios from 'axios'
 
 export const useCounterStore = defineStore('counter', () => {
   const boards = ref([])
+  const consultingBoards = ref([])
+  const anonymousBoards = ref([])
   const exchanges = ref([])
   const dProducts = ref([])
   const sProducts = ref([])
@@ -61,6 +63,43 @@ export const useCounterStore = defineStore('counter', () => {
         console.log(err)
       })
   }
+
+  // DRF에 Consulting 조회 요청을 보내는 action
+  const getConsultingBoards = function () {
+    axios({
+      method: 'get',
+      url: `${API_URL}/consultings/`,
+      headers: {
+        Authorization: `Token ${token.value}`
+      }
+    })
+      .then((res) =>{
+        console.log(res)
+        consultingBoards.value = res.data
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
+  // DRF에 Consulting 조회 요청을 보내는 action
+  const getAnonymousBoards = function () {
+    axios({
+      method: 'get',
+      url: `${API_URL}/anonymous_boards/`,
+      headers: {
+        Authorization: `Token ${token.value}`
+      }
+    })
+      .then((res) =>{
+        console.log(res)
+        anonymousBoards.value = res.data
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
   // 환율 정보를 백엔드 db에 저장하도록 하는 함수
   const updateExChange = function () {
     axios({
@@ -68,8 +107,8 @@ export const useCounterStore = defineStore('counter', () => {
     })
       .then((res) => {
         console.log(res)
-        router.push({name: 'ExChangeView'})
         window.alert("상품 정보를 불러왔습니다")
+        router.push({name: 'ExChangeView'})
         router.go(0)
       })
       .catch((err) => {
@@ -172,14 +211,14 @@ export const useCounterStore = defineStore('counter', () => {
 
   const signUp = function (payload) {
     const {
-      username, password1, password2, nickname, age, gender, asset, salary, email, phone_num
+      username, password1, password2, nickname, age, gender, asset, salary, email, phone_num, company, is_fin_job
      } = payload
 
     axios({
       method: 'post',
       url: `${API_URL}/accounts/signup/`,
       data: {
-        username, password1, password2, nickname, age, gender, asset, salary, email, phone_num
+        username, password1, password2, nickname, age, gender, asset, salary, email, phone_num, company, is_fin_job
       },
       headers: {
         'Content-Type': 'application/json',
@@ -260,13 +299,17 @@ export const useCounterStore = defineStore('counter', () => {
           asset: payload.asset,
           salary: payload.salary,
           email: payload.email,
-          phone_num: payload.phone_num
+          phone_num: payload.phone_num,
+          company: payload.company,
+          is_fin_job: payload.is_fin_job
         }
       })
         .then((res) => {
           console.log(res)
           userEmail.value = payload.email
           userNickname.value = payload.nickname
+          window.alert("유저정보가 변경되었습니다")
+          router.push({name: 'UserProfileView'})
         })
         .catch((err) => {
           console.log(err)
@@ -280,6 +323,7 @@ export const useCounterStore = defineStore('counter', () => {
   return { editProfile, userName, userNickname, userId, userEmail, boards, themeColor, exchanges, API_URL, getBoards, signUp, logIn, getExChange, token, isLogin, logOut, updateExChange, 
     getDeposits, dProducts, getSavings, sProducts, saveProducts,
     getSavingNews, sNewses, getDepositNews, dNewses,
-    showDeposit, showDepositList, showSaving, showSavingList
+    showDeposit, showDepositList, showSaving, showSavingList,
+    consultingBoards, getConsultingBoards, anonymousBoards, getAnonymousBoards
   }
 }, { persist: true })

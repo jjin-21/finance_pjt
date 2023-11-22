@@ -33,7 +33,7 @@
                       
                       <span class="body-1 ml-2">추천수 : {{ likeCount }}</span>
                       <!-- Add margin to the button -->
-                      <v-btn @click.prevent="likeBoard" color="error" icon class="ml-2">
+                      <v-btn @click.prevent="dislikeBoard" color="error" icon class="ml-2">
                         <v-icon>mdi-thumb-down-outline</v-icon>
                       </v-btn>
                     </v-col>
@@ -91,6 +91,8 @@ const comment = ref(null)
 const commentLst = ref([])
 const likeCount = ref(0)
 const boardId = ref(0)
+const likedState = ref(null)
+
 
 boardId.value = route.params.id
 // console.log(route.params.id)
@@ -113,6 +115,7 @@ onMounted(() => {
       console.log(res.data)
       board.value = res.data
       commentLst.value = res.data.comment_set
+      likedState.value = res.data.like_users.includes(store.userId)
     })
     .catch((err) => {
       console.log(err)
@@ -153,6 +156,7 @@ const goBack = function () {
 }
 
 const likeBoard = function () {
+  if (!likedState.value) {
   axios({
     method: 'post',
     url: `${store.API_URL}/anonymous_boards/${Number(route.params.id)}/likes/`,
@@ -163,11 +167,37 @@ const likeBoard = function () {
     .then((res) => {
       console.log(res)
       likeCount.value = res.data.like_users.length;
+      likedState.value = true
+      console.log(likedState.value)
     })
     .catch((err) => {
       console.log(err)
       
     })
+  }
+}
+
+const dislikeBoard = function () {
+  if (likedState.value) {
+  axios({
+    method: 'post',
+    url: `${store.API_URL}/anonymous_boards/${Number(route.params.id)}/likes/`,
+    headers: {
+      Authorization: `Token ${store.token}`
+    }
+  })
+    .then((res) => {
+      console.log(res)
+      likeCount.value = res.data.like_users.length;
+      likedState.value = false
+      console.log(likedState.value)
+
+    })
+    .catch((err) => {
+      console.log(err)
+      
+    })
+  }
 }
 
 watch(board, (newBoard) => {

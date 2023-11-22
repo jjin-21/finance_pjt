@@ -1,10 +1,10 @@
 <template>
   <v-container>
-    <h1 class="text-h2 mb-4">QnA Page</h1>
+    <h2 class="text-h3 mb-4">QnA 게시판</h2>
     <v-row class="mb-4">
       <v-col>
         <RouterLink :to="{ name: 'ConsultingBoardCreateView' }">
-          <v-btn color="primary">CREATE</v-btn>
+          <v-btn color="primary"><h3>글작성</h3></v-btn>
         </RouterLink>
       </v-col>
     </v-row>
@@ -26,7 +26,7 @@ onMounted(() => {
 
 <style scoped>
 .text-h2 {
-  font-size: 24px;
+  font-size: px;
 }
 
 .mb-4 {

@@ -14,7 +14,7 @@
           ></v-textarea>
           <v-btn type="submit" style="height: 56px;">댓글 작성</v-btn>
         </form>
-        <CommentListItem
+        <AnonymousCommentListItem
           v-for="comment in paginatedComments"
           :key="comment.id"
           :comment="comment"
@@ -36,6 +36,7 @@ import { ref, computed } from 'vue';
 import axios from 'axios';
 import { useCounterStore } from '@/stores/counter';
 import { useRoute, useRouter } from 'vue-router';
+import AnonymousCommentListItem from './AnonymousCommentListItem.vue';
 
 const route = useRoute();
 const router = useRouter();

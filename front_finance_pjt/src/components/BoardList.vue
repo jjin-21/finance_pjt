@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>Board List</h3>
+    <h3>전체 게시글</h3>
     <BoardListItem
       v-for="board in paginatedBoards"
       :key="board.id"

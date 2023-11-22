@@ -28,7 +28,7 @@
             item-key="name"
             >
             <template v-slot:item="{ item }">
-              <tr @click="navigateToSavingDetails(item.fin_prdt_cd)">
+              <tr @click="navigateToDepositDetails(item.fin_prdt_cd)">
                 <td>{{ item.kor_co_nm }}</td>
                 <td>{{ item.fin_prdt_nm }}</td>
                 <td>{{ item.term_6 }}</td>
@@ -130,6 +130,10 @@ const showSavingList = () => {
   showDeposit.value = false
 };
 
+const navigateToDepositDetails = (productId) => {
+  console.log(productId)
+  router.push({name: 'ProductDepositView', params:{id: productId}})
+}
 const navigateToSavingDetails = (productId) => {
   console.log(productId)
   router.push({name: 'ProductSavingView', params:{id: productId}})

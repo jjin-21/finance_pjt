@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>전체 게시글</h3>
+    <h3>인기 게시글</h3>
     <AnonymousBoardListItem
       v-for="board in paginatedBoards"
       :key="board.id"
@@ -28,8 +28,11 @@ const paginatedBoards = ref([])
 const totalPages = ref(1)
 
 const updatePagination = () => {
+   // Filter boards with like count greater than or equal to 1
+   const filteredBoards = store.anonymousBoards.filter(board => board.like_users.length >= 1)
+
   // Reverse the order of the boards and then slice them
-  const reversedBoards = store.anonymousBoards.slice().reverse()
+  const reversedBoards = filteredBoards.slice().reverse()
   totalPages.value = Math.ceil(reversedBoards.length / itemsPerPage)
   const startIndex = (currentPage.value - 1) * itemsPerPage
   const endIndex = startIndex + itemsPerPage

@@ -26,6 +26,7 @@ import AnonymousBoardView from '@/views/AnonymousBoardView.vue'
 import AnonymousBoardCreateView from '@/views/AnonymousBoardCreateView.vue'
 import AnonymousBoardDetailView from '@/views/AnonymousBoardDetailView.vue'
 import AnonymousBoardUpdateView from '@/views/AnonymousBoardUpdateView.vue'
+import ProductRecommendView from '@/views/ProductRecommendView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -164,6 +165,11 @@ const router = createRouter({
       path: '/anonymous/create',
       name: 'AnonymousBoardCreateView',
       component: AnonymousBoardCreateView
+    },
+    {
+      path: '/product/recommend/:id',
+      name: 'ProductRecommendView',
+      component: ProductRecommendView
     },
 
   ]

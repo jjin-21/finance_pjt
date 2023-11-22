@@ -66,6 +66,10 @@
             </v-list>
           </v-card>
         </v-dialog>
+
+        <v-btn
+          :to="{name: 'UserProfileView'}"
+        >Recommend</v-btn>
         
         
 

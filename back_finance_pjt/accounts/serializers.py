@@ -18,17 +18,19 @@ class CustomRegisterSerializer(RegisterSerializer):
         (1, '금융 관련 업종'),
     ]
     email = serializers.EmailField(required=True)
-    company = serializers.CharField(max_length=20, default="무직")
+    company = serializers.CharField(max_length=20, default='무직')
     is_fin_job = serializers.ChoiceField(choices=FIN_CHOICES, required=True)
     phone_num = serializers.CharField(required=True)
     nickname = serializers.CharField(required=True)
     age = serializers.IntegerField(required=True)
     gender = serializers.ChoiceField(choices=GENDER_CHOICES, required=True)
-    asset = serializers.IntegerField(required=False)
-    salary = serializers.IntegerField(required=False)
+    asset = serializers.IntegerField(default=0)
+    salary = serializers.IntegerField(default=0)
     
     def get_cleaned_data(self):
         cleaned_data = super().get_cleaned_data()
+        cleaned_data['company'] = self.validated_data.get('company', '')
+        cleaned_data['is_fin_job'] = self.validated_data.get('is_fin_job', '')
         cleaned_data['phone_num'] = self.validated_data.get('phone_num', '')
         cleaned_data['nickname'] = self.validated_data.get('nickname', '')
         cleaned_data['age'] = self.validated_data.get('age', '')
@@ -42,6 +44,8 @@ class CustomRegisterSerializer(RegisterSerializer):
         adapter = get_adapter()
         user = adapter.new_user(request)
         self.cleaned_data = self.get_cleaned_data()
+        user.company = self.cleaned_data.get('company')
+        user.is_fin_job = self.cleaned_data.get('is_fin_job')
         adapter.save_user(request, user, self)
         self.custom_signup(request, user)
         return user

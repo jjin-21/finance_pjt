@@ -277,7 +277,7 @@ export const useCounterStore = defineStore('counter', () => {
             userEmail.value = null;
             userId.value = null;
             console.log(res);
-            router.push('/home')
+            router.push('/')
         })
         .catch((err) => {
             console.log(err);

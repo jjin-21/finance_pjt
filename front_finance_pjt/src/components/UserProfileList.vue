@@ -36,8 +36,11 @@
         <!-- Profile Actions Section -->
         <v-row class="my-1">
           <v-col>
-            <v-btn variant="outlined" :to="({ name: 'UserProfileProductView', params: { id: store.userId } })">
+            <v-btn class="mr-2" variant="outlined" :to="({ name: 'UserProfileProductView', params: { id: store.userId } })">
               <h3>내가 담은 상품</h3>
+            </v-btn>
+            <v-btn variant="outlined" :to="({ name: 'ProductRecommendView', params: { id: store.userId } })">
+              <h3>상품 추천 받기</h3>
             </v-btn>
           </v-col>
           <v-col>
@@ -51,7 +54,7 @@
         <!-- User Posts Section -->
         <v-row>
           <v-col>
-            <h3>User Posts</h3>
+            <h3>내가 작성한 글</h3>
             <v-list>
               <v-list-item v-for="post in paginatedUserPosts" :key="post.id">
                 <v-list-item-content>
@@ -74,7 +77,7 @@
         <!-- User Comments Section -->
         <v-row>
           <v-col>
-            <h3>User Comments</h3>
+            <h3>내가 작성한 댓글</h3>
             <v-list>
               <v-list-item v-for="comment in paginatedUserComments" :key="comment.id">
                 <v-list-item-content>
@@ -127,6 +130,7 @@ onMounted(() => {
   })
     .then((res) => {
       profileData.value = res.data
+      console.log(res)
     })
     .catch((err) => {
       console.log(err)

@@ -62,12 +62,16 @@ def recommend(request, user_pk):
     for recommend in recommend_list:
         if recommend in deposit_products:
             tmp = DepositProducts.objects.get(fin_prdt_cd=recommend)
-            deposit_recommends.append({'bank': tmp.kor_co_nm,
-                                        'product_name': tmp.fin_prdt_nm})
+            deposit_recommends.append({'kor_co_nm': tmp.kor_co_nm,
+                                        'fin_prdt_cd': tmp.fin_prdt_cd,
+                                        'fin_prdt_nm': tmp.fin_prdt_nm,
+                                    })
         elif recommend in saving_products:
             tmp = SavingProducts.objects.get(fin_prdt_cd=recommend)
-            saving_recommends.append({'bank': tmp.kor_co_nm,
-                                        'product_name': tmp.fin_prdt_nm})
+            saving_recommends.append({'kor_co_nm': tmp.kor_co_nm,
+                                        'fin_prdt_cd': tmp.fin_prdt_cd,
+                                        'fin_prdt_nm': tmp.fin_prdt_nm,
+                                    })
     print("Deposit",deposit_recommends)
     print("Saving",saving_recommends)
     return Response({

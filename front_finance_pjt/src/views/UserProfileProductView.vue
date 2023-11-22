@@ -123,6 +123,7 @@ onMounted(() => {
 const showDepositList = () => {
   showDeposit.value = true
   showSaving.value = false
+  
 };
 
 const showSavingList = () => {

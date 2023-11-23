@@ -72,6 +72,7 @@ class CustomTokenSerializer(serializers.ModelSerializer):
     username= serializers.SerializerMethodField()
     nickname= serializers.SerializerMethodField()
     email= serializers.SerializerMethodField()
+    is_fin_job= serializers.SerializerMethodField()
     
     def get_username(self,obj):
         return obj.user.username
@@ -82,6 +83,9 @@ class CustomTokenSerializer(serializers.ModelSerializer):
     def get_email(self,obj):
         return obj.user.email
 
+    def get_is_fin_job(self,obj):
+            return obj.user.is_fin_job
+
     class Meta:
         model = Token
-        fields = ('key', 'user', 'username','nickname','email')
+        fields = ('key', 'user', 'username','nickname','email','is_fin_job')

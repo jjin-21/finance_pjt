@@ -34,7 +34,7 @@
         "user": 4,
         "title": "저녁 인증",
         "content": "고추바사삭은 역시 뼈지~",
-        "image": "고바.jpg",
+        "image": "chicken.jpg",
         "created_at": "2023-11-23T23:08:28.623",
         "updated_at": "2023-11-23T23:08:28.623",
         "like_users": []
@@ -47,7 +47,7 @@
         "user": 3,
         "title": "우리집 고양이 인증",
         "content": "ㄱㅇㅇ",
-        "image": "고양이.jpeg",
+        "image": "cat.jpeg",
         "created_at": "2023-11-23T23:20:43.472",
         "updated_at": "2023-11-23T23:20:43.472",
         "like_users": [
@@ -64,7 +64,7 @@
         "user": 6,
         "title": "내일 금요일인데 점심 개꿀맛 ㄱㅇㄷ",
         "content": "나이스",
-        "image": "점심.png",
+        "image": "bob.png",
         "created_at": "2023-11-23T23:29:56.261",
         "updated_at": "2023-11-23T23:29:56.261",
         "like_users": [
@@ -110,7 +110,7 @@
         "user": 2,
         "title": "오늘 백준 플레찍음 축하점",
         "content": "사실롤임 ㅋㅋ",
-        "image": "스크린샷_2023-11-23_오후_11.35.07.png",
+        "image": "lol.png",
         "created_at": "2023-11-23T23:35:45.142",
         "updated_at": "2023-11-23T23:35:45.142",
         "like_users": [

@@ -40,7 +40,7 @@ def recommend(request, user_pk):
                             columns=['age', 'gender', 'money', 'salary'])
     # DataFrame을 사용하여 예측 수행
     predictions = loaded_kmeans.predict(user_df)
-
+    print(predictions)
     a['cluster'] = loaded_kmeans.labels_
 
     # 동일한 클러스터에 있는 사용자의 금융 상품 추출
@@ -72,8 +72,6 @@ def recommend(request, user_pk):
                                         'fin_prdt_cd': tmp.fin_prdt_cd,
                                         'fin_prdt_nm': tmp.fin_prdt_nm,
                                     })
-    print("Deposit",deposit_recommends)
-    print("Saving",saving_recommends)
     return Response({
         "deposit_recommends": deposit_recommends,
         "saving_recommends": saving_recommends

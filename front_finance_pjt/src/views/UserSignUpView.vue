@@ -102,13 +102,13 @@
       <v-text-field
       v-model="salary"
       color="primary"
-      label="월급"
+      label="연봉"
       placeholder="숫자만 입력해주세요"
       variant="underlined"
       type="number"
       ></v-text-field>
       
-     
+    
     </v-container>
 
     <v-divider></v-divider>

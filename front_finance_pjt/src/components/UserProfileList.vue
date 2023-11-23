@@ -15,13 +15,13 @@
                 <v-list-item>
                   <v-list-item-content>
                     <v-list-item-title>Username: {{ profileData.username }}</v-list-item-title>
-                    <v-list-item-title>Nickname: {{ profileData.nickname }}</v-list-item-title>
-                    <v-list-item-title>Email: {{ profileData.email }}</v-list-item-title>
-                    <v-list-item-title>PhoneNumber: {{ profileData.phone_num }}</v-list-item-title>
-                    <v-list-item-title>Gender: {{ genderType }}</v-list-item-title>
-                    <v-list-item-title>Company: {{ profileData.company }}</v-list-item-title>
-                    <v-list-item-title>Asset: {{ profileData.asset }}</v-list-item-title>
-                    <v-list-item-title>Salary: {{ profileData.salary }}</v-list-item-title>
+                    <v-list-item-title>닉네임: {{ profileData.nickname }}</v-list-item-title>
+                    <v-list-item-title>E-mail: {{ profileData.email }}</v-list-item-title>
+                    <v-list-item-title>전화번호: {{ profileData.phone_num }}</v-list-item-title>
+                    <v-list-item-title>성별: {{ genderType }}</v-list-item-title>
+                    <v-list-item-title>회사: {{ profileData.company }}</v-list-item-title>
+                    <v-list-item-title>자산: {{ profileData.asset }}</v-list-item-title>
+                    <v-list-item-title>연봉: {{ profileData.salary }}</v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>
               </v-list>

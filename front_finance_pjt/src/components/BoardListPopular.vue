@@ -29,7 +29,7 @@ const totalPages = ref(1)
 
 const updatePagination = () => {
   // Filter boards with like count greater than or equal to 1
-  const filteredBoards = store.boards.filter(board => board.like_users.length >= 1)
+  const filteredBoards = store.boards.filter(board => board.like_users.length >= 3)
 
   // Reverse the order of the boards and then slice them
   const reversedBoards = filteredBoards.slice().reverse()

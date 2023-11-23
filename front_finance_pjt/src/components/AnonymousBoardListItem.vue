@@ -9,7 +9,7 @@
             </a>
           </span>
         </v-list-item-title>
-        <v-list-item-subtitle>글쓴이: {{ board.username }} | 추천수: {{ board.like_users.length }} | 작성시간: {{ formatDateTime(board.created_at) }}</v-list-item-subtitle>
+        <v-list-item-subtitle>글쓴이: 익명{{ board.user }} | 추천수: {{ board.like_users.length }} | 작성시간: {{ formatDateTime(board.created_at) }}</v-list-item-subtitle>
       </v-list-item-content>
       <v-divider></v-divider>
     </v-list-item>

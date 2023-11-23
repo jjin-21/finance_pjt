@@ -14,7 +14,7 @@
                     </v-col>
                   </v-row>
                   <v-divider></v-divider>
-                  <p class="caption">작성자: {{ board.username }} 작성일: {{ formatDateTime(board.created_at) }}</p>
+                  <p class="caption">작성자: 익명{{ board.user}} 작성일: {{ formatDateTime(board.created_at) }}</p>
                   <v-divider></v-divider>
                   <div v-if="board.image">
                     <v-img :src="getImageUrl(board.image)" alt="" style="max-height: 300px;"></v-img>

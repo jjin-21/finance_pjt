@@ -3,7 +3,18 @@
     <v-row>
       <v-col>
         <h3 class="mb-4">Comment List</h3>
-        <form @submit.prevent="createComment" class="d-flex">
+        <form @submit.prevent="createComment" v-if="store.userIsFinJob === 0" class="d-flex">
+          <v-textarea
+            label="댓글을 작성하실 수 없습니다"
+            outlined
+            rows="1"
+            readonly=""
+            class="mb-1 mr-2"
+            @keydown.enter="handleEnter"
+          ></v-textarea>
+          <v-btn type="submit" style="height: 56px;">댓글 작성</v-btn>
+        </form>
+        <form @submit.prevent="createComment" v-if="store.userIsFinJob === 1" class="d-flex">
           <v-textarea
             v-model="comment"
             label="댓글을 작성하세요"

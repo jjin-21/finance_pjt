@@ -19,6 +19,8 @@ export const useCounterStore = defineStore('counter', () => {
   const userNickname = ref(null)
   const userId = ref(null)
   const userEmail = ref(null)
+  const userCompany = ref(null)
+  const userIsFinJob = ref(null)
   const themeColor = ref('light')
 
   // 예 적금 표기관련
@@ -256,6 +258,8 @@ export const useCounterStore = defineStore('counter', () => {
         userNickname.value = res.data.nickname
         userId.value = res.data.user
         userEmail.value = res.data.email
+        userIsFinJob.value = res.data.is_fin_job
+        userCompany.value = res.data.company
         router.push({ name : 'HomeView'})
       })
       .catch((err) => {
@@ -279,6 +283,8 @@ export const useCounterStore = defineStore('counter', () => {
             userNickname.value = null;
             userEmail.value = null;
             userId.value = null;
+            userIsFinJob.value = null;
+            userCompany.value = null;
             console.log(res);
             router.push('/')
         })
@@ -323,7 +329,7 @@ export const useCounterStore = defineStore('counter', () => {
 
 
 
-  return { editProfile, userName, userNickname, userId, userEmail, boards, themeColor, exchanges, API_URL, getBoards, signUp, logIn, getExChange, token, isLogin, logOut, updateExChange, 
+  return { editProfile, userName, userNickname, userId, userEmail, userIsFinJob, userCompany, boards, themeColor, exchanges, API_URL, getBoards, signUp, logIn, getExChange, token, isLogin, logOut, updateExChange, 
     getDeposits, dProducts, getSavings, sProducts, saveProducts,
     getSavingNews, sNewses, getDepositNews, dNewses,
     showDeposit, showDepositList, showSaving, showSavingList,

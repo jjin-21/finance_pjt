@@ -7,7 +7,7 @@
           <v-row>
             <v-col v-if="!isUpdating" class="d-flex justify-space-between align-center">
               <div>
-                작성자: {{ comment.username }} 작성시간: {{ formatDateTime(comment.created_at) }}
+                글쓴이: 익명{{ comment.user }} 작성시간: {{ formatDateTime(comment.created_at) }}
               </div>
             </v-col>
             <v-col v-if="isUpdating">

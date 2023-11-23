@@ -112,26 +112,26 @@
       <v-container fluid class="pa-0">
         <v-row no-gutters>
           <v-col cols="2">
-            <v-sheet min-height="150vh"  rounded="0">
+            <v-sheet min-height="200vh"  rounded="0">
               <!-- ... (좌측 컬럼 내용) ... -->
               
             </v-sheet>
           </v-col>
 
           <v-col  cols="8">
-            <v-sheet min-height="150vh" rounded="0">
+            <v-sheet min-height="200vh" rounded="0">
               <router-view />
             </v-sheet>
           </v-col>
 
           <v-col cols="2">
-            <v-sheet min-height="150vh" rounded="0">
+            <v-sheet min-height="200vh" rounded="0">
               <!-- ... (우측 컬럼 내용) ... -->
             </v-sheet>
           </v-col>
         </v-row>
       </v-container>
-      <v-footer :color="store.themeColor === 'dark' ? 'grey-darken-3' : 'grey-lighten-4'" app>
+      <v-footer :color="store.themeColor === 'dark' ? 'grey-darken-3' : 'grey-lighten-4'">
         <v-row justify="center" no-gutters>
           <v-btn
             v-for="link in links"

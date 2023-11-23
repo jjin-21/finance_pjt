@@ -1,0 +1,14 @@
+[
+{
+    "model": "consultings.consulting",
+    "pk": 1,
+    "fields": {
+        "user": 6,
+        "title": "핀붕이 주식계좌 인증",
+        "content": "음봉인 이제 어쩌죠...",
+        "image": "주식1.jpeg",
+        "created_at": "2023-11-23T23:44:59.419",
+        "updated_at": "2023-11-23T23:44:59.419"
+    }
+}
+]

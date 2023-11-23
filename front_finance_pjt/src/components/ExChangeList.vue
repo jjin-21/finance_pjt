@@ -59,7 +59,7 @@ export default {
     this.exchangeList = store.exchanges.filter(exchange => exchange.cur_unit !== 'KRW');
   },
 
- 
+
 };
 </script>
 

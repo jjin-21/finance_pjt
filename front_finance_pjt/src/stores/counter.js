@@ -109,7 +109,9 @@ export const useCounterStore = defineStore('counter', () => {
         console.log(res)
         window.alert("상품 정보를 불러왔습니다")
         router.push({name: 'ExChangeView'})
-        router.go(0)
+        getExChange()
+        window.location.reload();
+
       })
       .catch((err) => {
         console.log(err)
@@ -212,7 +214,7 @@ export const useCounterStore = defineStore('counter', () => {
   const signUp = function (payload) {
     const {
       username, password1, password2, nickname, age, gender, asset, salary, email, phone_num, company, is_fin_job
-     } = payload
+      } = payload
 
     axios({
       method: 'post',
@@ -230,6 +232,7 @@ export const useCounterStore = defineStore('counter', () => {
         router.push({name: 'LogInView'})
       })
       .catch((err) => {
+        window.alert('정보 입력이 올바르지 않습니다.')
         console.log(err)
       })
   }

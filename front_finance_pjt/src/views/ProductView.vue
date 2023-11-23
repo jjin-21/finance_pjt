@@ -11,9 +11,9 @@
         <v-col>
           <v-btn variant="outlined" @click="showSavingList">적금 목록</v-btn>
         </v-col>
-        <v-col>
+        <!-- <v-col>
           <v-btn variant="outlined" @click="store.saveProducts">예적금 목록 불러오기</v-btn>
-        </v-col>
+        </v-col> -->
       </v-row>
 
       <v-row>

@@ -53,8 +53,7 @@
 - 비밀번호 변경 기능 구현 |
 
 ### 🛠Tech Stack
-
-![기술스택.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/61ad065d-e901-4822-92e8-90f905def7b6/3459e497-42f1-4441-bdcd-8277f815430a/%E1%84%80%E1%85%B5%E1%84%89%E1%85%AE%E1%86%AF%E1%84%89%E1%85%B3%E1%84%90%E1%85%A2%E1%86%A8.png)
+<img width="655" alt="123123123" src="https://github.com/jjin-21/finance_pjt/assets/113574354/7260f2c2-1b11-415c-893e-c747fba7d848">
 
 ### 💠데이터베이스 모델링(ERD)
 
@@ -62,11 +61,14 @@
 
 ### 📚컴포넌트 구조
 
-![App_component.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/61ad065d-e901-4822-92e8-90f905def7b6/4b4abdd1-621c-4763-a967-7ef15cd83c29/App_component.png)
+![App component](https://github.com/jjin-21/finance_pjt/assets/113574354/d73f118e-3381-4ccf-82dd-846c33090a85)
+
 
 ### 🧾간트차트
 
-![간트차트.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/61ad065d-e901-4822-92e8-90f905def7b6/43a3ed75-39ba-4e91-bd85-917c89a9baa5/%E1%84%80%E1%85%A1%E1%86%AB%E1%84%90%E1%85%B3%E1%84%8E%E1%85%A1%E1%84%90%E1%85%B3.png)
+![간트차트](https://github.com/jjin-21/finance_pjt/assets/113574354/745d011a-0627-42ab-a5e0-fc15dac4af25)
+
+
 
 ### 🍀 배운점 및 느낀점
 

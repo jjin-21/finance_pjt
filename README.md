@@ -58,7 +58,7 @@
 
 ### 💠데이터베이스 모델링(ERD)
 
-![ERD.PNG](https://prod-files-secure.s3.us-west-2.amazonaws.com/61ad065d-e901-4822-92e8-90f905def7b6/a9b6d339-5cd6-4577-ba82-900981d412a3/ERD.png)
+![ERD](https://github.com/jjin-21/finance_pjt/assets/113574354/03fb7b40-ff2e-45d4-aeda-c52a7337eae6)
 
 ### 📚컴포넌트 구조
 
@@ -77,4 +77,4 @@
 기능 구현은 하였으나 디자인 에서 너무 부족함을 느꼈다.
 방학 때 보완 해야 할 점에 대해서 많이 느끼는 계기가 되었다.
 
-### 이재진![erd](https://github.com/jjin-21/finance_pjt/assets/113574354/03fb7b40-ff2e-45d4-aeda-c52a7337eae6)
+### 이재진

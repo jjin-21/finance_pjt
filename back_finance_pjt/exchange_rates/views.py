@@ -19,7 +19,7 @@ def save(request):
         URL = 'https://www.koreaexim.go.kr/site/program/financial/exchangeJSON'
         params = {
             'authkey': settings.RATE_API_KEY,
-            # 'searchdate': '20231111',
+            'searchdate': 20231123,
             'data': 'AP01'
         }
 

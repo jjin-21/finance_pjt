@@ -1,0 +1,13 @@
+[
+{
+    "model": "consultings.answer",
+    "pk": 1,
+    "fields": {
+        "user": 2,
+        "consulting": 1,
+        "content": "내일 당장 집근처 은행 뛰어가서 예금이나 들어라",
+        "created_at": "2023-11-23T23:45:40.933",
+        "updated_at": "2023-11-23T23:45:40.933"
+    }
+}
+]
